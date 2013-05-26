@@ -1,0 +1,57 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Catégories{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Catégories <small>LISTE DES CATÉGORIES</small></h3>
+		<a class="btn btn-success" href="add.php"><i class="icon-plus-sign icon-white"></i> Ajouter une catégorie</a>
+		<hr />
+		{% if addCategory is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			La catégorie <em>{{ addCategory.title}}</em> a bien été ajoutée.
+		</div>
+		{% endif %}
+		{% if editCategory is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			La catégorie <em>{{ editCategory.title }}</em> a bien été modifiée.
+		</div>
+		{% endif %}
+		{% if rmvCategory is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			La catégorie a bien été supprimée.
+		</div>
+		{% endif %}
+
+		{% if categories is not empty %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Nombre de produits</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+				<tr>
+					<td>{{ category.title }}</td>
+					<td>{{ getNbProductsCategory(category.id) }}</td>
+					<td>
+						<p>
+							<a class="btn btn-info" href="edit.php?category={{ category.id }}"><i class="icon-pencil icon-white"></i> Modifier</a>
+							<a class="btn btn-danger fancy-remove" href="remove.php?category={{ category.id }}" data-id="{{ category.id }}"><i class="icon-remove icon-white"></i> Supprimer</a>
+						</p>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>Aucune catégorie.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

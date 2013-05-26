@@ -1,0 +1,66 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Backoffice - Produits{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Produits <small>LISTE DES PRODUITS</small></h3>
+		<a class="btn btn-success" href="add.php"><i class="icon-plus-sign icon-white"></i> Ajouter un produit</a>
+		<hr />
+
+		{% if addProduct is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			Le produit <em>{{ addProduct.title }}</em> a bien été ajouté.
+		</div>
+		{% endif %}
+		{% if editProduct is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			Le produit <em>{{ editProduct.title }}</em> a bien été modifié.
+		</div>
+		{% endif %}
+		{% if rmvProduct is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			Le produit a bien été supprimé.
+		</div>
+		{% endif %}
+
+		{% if products is not empty %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Image d'aperçu</th>
+					<th>Titre</th>
+					<th>Catégorie</th>
+					<th>Artiste</th>
+					<th>Prix</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+				{% set category = getCategoryById(product.id_category) %}
+				{% set artist = getArtistById(product.id_artist) %}
+				<tr>
+					<td><img src="{{ resize(root~'uploads/products/'~product.image, 115, 115, 'outbound') }}" alt="" /></td>
+					<td>{{ product.title }}</td>
+					<td>{{ category.title }}</td>
+					<td>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</td>
+					<td>{{ product.price }} €</td>
+					<td>
+						<p>
+							<a class="btn btn-info" href="edit.php?product={{ product.id }}"><i class="icon-pencil icon-white"></i> Modifier</a>
+							<a class="btn btn-danger fancy-remove" href="remove.php?product={{ product.id }}"><i class="icon-remove icon-white"></i> Supprimer</a>
+						</p>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>Aucun produit.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

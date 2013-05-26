@@ -1,0 +1,14 @@
+<ul class="breadcrumb">
+	<li{% if active != 'cart' %} class="active"{% else %} class="text-info"{% endif %}>
+		<span class="badge{% if active == 'cart'%} badge-info{% endif %}">1</span> Panier <span class="divider">/</span>
+	</li>
+	<li{% if active != 'authentication' %} class="active"{% else %} class="text-info"{% endif %}>
+		<span class="badge{% if active == 'authentication'%} badge-info{% endif %}">2</span> Identifiez-vous <span class="divider">/</span>
+	</li>
+	<li{% if active != 'delivery' %} class="active"{% else %} class="text-info"{% endif %}>
+		<span class="badge{% if active == 'delivery'%} badge-info{% endif %}">3</span> Livraison <span class="divider">/</span>
+	</li>
+	<li{% if active != 'confirmation' %} class="active"{% else %} class="text-info"{% endif %}>
+		<span class="badge{% if active == 'confirmation'%} badge-info{% endif %}">4</span> Confirmation
+	</li>
+</ul>

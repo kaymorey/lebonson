@@ -1,0 +1,14 @@
+{% set artist = getArtistById(product.id_artist) %}
+<div class="span6 remove-container">
+	<h3 class="remove-confirm-title">Êtes-vous sûr de vouloir supprimer le produit suivant ?</h3>
+	<p class="text-warning lead remove-category-title">
+		{{ product.title  }} - {% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}
+	</p>
+	<p>
+		<img src="{{ resize(root~'uploads/products/'~product.image, 115, 115, 'outbound') }}" alt="" />
+	</p>
+	<a class="btn btn-info" href="remove.php?product={{ product.id }}"><i class="icon-ok icon-white"></i> Valider</a>
+	<a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> Annuler</a>
+</div>
+
+

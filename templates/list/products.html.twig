@@ -1,0 +1,28 @@
+{% set artist = getArtistById(product.id_artist) %}
+{% if loop.index % 4 == 1 %}
+<div class="row-fluid">
+{% endif %}
+	<div class="span3">
+		<p class="text-center">
+			<img src="{{ resize(root~'uploads/products/'~product.image, 180, 180, 'outbound') }}" alt="" />
+		</p>
+		<div class="caption">
+			{% if product.in_stock == 1%}
+				<span class="label label-success">En stock</span>
+			{% else %}
+				<span class="label label-important">Épuisé</span>
+			{% endif %}
+			<h5>{{ product.title }}<br />
+				<small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small>
+			</h5>
+			<p class="lead">{{ product.price }}€</p>
+			<p class="text-center">
+				<a href="cart.php?add={{ product.id }}" class="btn btn-block btn-primary fancy-add-cart"><i class="icon-plus-sign icon-white"></i> Ajouter au panier</a>
+			</p>
+		</div>
+	</div>
+{% if loop.index % 4 == 0 %}
+</div>
+<hr />
+{% endif %}
+			

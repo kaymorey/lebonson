@@ -1,0 +1,61 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Artistes{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Artistes <small>LISTE DES ARTISTES</small></h3>
+		<a class="btn btn-success" href="add.php"><i class="icon-plus-sign icon-white"></i> Ajouter un artiste</a>
+		<hr />
+		{% if editArtist is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			L'artiste <em>{% if editArtist.firstname is not null %}{{ editArtist.firstname}} {% endif %}{{ editArtist.lastname }}</em> a bien été modifié.
+		</div>
+		{% endif %}
+		{% if addArtist is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			L'artiste <em>{% if addArtist.firstname is not null %}{{ addArtist.firstname}} {% endif %}{{ addArtist.lastname }}</em> a bien été ajouté.
+		</div>
+		{% endif %}
+		{% if rmvArtist is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			L'artiste a bien été supprimé.
+		</div>
+		{% endif %}
+
+		{% if artists is not empty %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Prénom</th>
+					<th>Nom</th>
+					<th>Biographie</th>
+					<th>Nombre de produits</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for artist in artists %}
+				<tr>
+					<td>{{ artist.firstname }}</td>
+					<td>{{ artist.lastname }}</td>
+					<td>{{ artist.biography }}</td>
+					<td>{{ getNbProductsArtist(artist.id) }}</td>
+					<td>
+						<p>
+							<a class="btn btn-info" href="edit.php?artist={{ artist.id }}"><i class="icon-pencil icon-white"></i> Modifier</a>
+							<a class="btn btn-danger fancy-remove" href="remove.php?artist={{ artist.id }}" data-id="{{ artist.id }}"><i class="icon-remove icon-white"></i> Supprimer</a>
+						</p>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>Aucun artiste.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

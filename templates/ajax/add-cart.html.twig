@@ -1,0 +1,26 @@
+{% set artist = getArtistById(product.id_artist) %}
+<div class="container-fluid add-cart">
+	<div class="span5">
+		<h4>Vous venez d'ajouter l'article suivant à votre panier </h4>
+		<hr />
+		<div class="row-fluid">
+			<div class="span3">
+				<img src="{{ resize(root~'uploads/products/'~product.image, 120, 120, 'outbound') }}" alt="" />
+			</div>
+			<div class="span3">
+				<h5>{{ product.title }}<br />
+					<small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small>
+				</h5>
+				<p class="lead">{{ product.price }}€</p>
+			</div>
+			<div class="span6 actions">
+				<a class="btn btn-small btn-primary order" href="#">
+					<i class="icon-arrow-left icon-white"></i> Continuer mes achats
+				</a>
+				<a class="btn btn-small btn-info" href="{{ root }}cart.php">
+					<i class="icon-ok icon-white"></i> Valider mon panier
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Modifier - Catégories{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Catégories <small>MODIFIER UNE CATÉGORIE</small></h3>
+		<a class="btn btn-success" href="index.php"><i class="icon-circle-arrow-left icon-white"></i> Retour aux catégories</a>
+		<hr />
+		{% if errors %}
+		<div class="alert alert-error">
+			{% for error in errors %}
+				{{ error }}
+				{% if loop.last == false %}
+				<br />
+				{% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
+		<form action="edit.php?category={{ category.id }}" method="post">
+			<label for="title">Nom *</label>
+			<input type="text" name="title" id="title" value="{{ category.title }}" />
+			<br />
+
+			<input type="submit" class="btn btn-primary" value="Valider" />
+			<br />
+			<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+		</form>
+	</div>
+</div>
+{% endblock %}

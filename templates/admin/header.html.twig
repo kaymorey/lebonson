@@ -1,0 +1,29 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="{{ root }}admin/index.php">Le bon son</a>
+			<ul class="nav">
+				<li{% if categoryMenu == 'products' %} class="active"{% endif %}>
+					<a href="{{ root}}admin/products">Produits</a>
+				</li>
+				<li{% if categoryMenu == 'artists' %} class="active"{% endif %}>
+					<a href="{{ root}}admin/artists">Artistes</a>
+				</li>
+				<li{% if categoryMenu == 'categories' %} class="active"{% endif %}>
+					<a href="{{ root }}admin/categories">Catégories</a>
+				</li>
+				<li{% if categoryMenu == 'orders' %} class="active"{% endif %}>
+					<a href="#">Commandes</a>
+				</li>
+				<li{% if categoryMenu == 'customers' %} class="active"{% endif %}>
+					<a href="#">Clients</a>
+				</li>
+			</ul>
+			<ul class="nav pull-right">
+				<li>
+					<a href="{{ root }}index.php" target="blank"><i class="icon-circle-arrow-right icon-white"></i> Voir le site</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

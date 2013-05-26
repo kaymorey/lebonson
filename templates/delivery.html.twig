@@ -1,0 +1,10 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Livraison{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<h3>Livraison</h3>
+	{% include 'content/order-steps.html.twig' with {'active' : 'delivery'} %}
+	<div class="row-fluid">
+	</div>
+</div>
+{% endblock %}

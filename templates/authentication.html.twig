@@ -1,0 +1,67 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Identification{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<h3>Identification</h3>
+	{% include 'content/order-steps.html.twig' with {'active' : 'authentication'} %}
+	<div class="row-fluid">
+		<div class="span6">
+			<h4>Vous possédez déjà un compte ?</h4>
+			<p class="lead">Connectez-vous</p>
+			{% if errorsConnexion %}
+			<div class="alert alert-error">
+				{% for error in errorsConnexion %}
+					{{ error }}
+					{% if loop.last == false %}
+					<br />
+					{% endif %}
+				{% endfor %}
+			</div>
+			{% endif %}
+			<form method="post" action="authentication.php">
+				<label for="mail">Email</label>
+				<input type="text" id="mail" name="mail" value="" />
+
+				<label for="password">Mot de passe</label>
+				<input type="password" id="password" name="passwd" />
+				<br />
+				<input type="hidden" name="action" value="connexion" />
+				<button type="submit" class="btn btn-primary">Connexion</button>
+			</form>
+		</div>
+		<div class="span6">
+			<h4>Pas encore de compte ?</h4>
+			<p class="lead">Inscrivez-vous</p>
+			{% if errorsRegistration %}
+			<div class="alert alert-error">
+				{% for error in errorsRegistration %}
+					{{ error }}
+					{% if loop.last == false %}
+					<br />
+					{% endif %}
+				{% endfor %}
+			</div>
+			{% elseif addCustomer %}
+			<div class="alert alert-success">
+				Merci, votre inscription a bien été prise en compte.<br />
+				Un email de confirmation a été envoyé à {{ mail }}.
+				Veuillez cliquer sur le lien d'activation qu'il contient pour activer votre compte.
+			</div>
+			{% endif %}
+			<form method="post" action="authentication.php">
+				<label for="mail">Email</label>
+				<input type="text" id="mail" name="mail" {% if mail %}value="{{ mail }}" {% endif %}/>
+
+				<label for="password">Mot de passe</label>
+				<input type="password" id="password" name="passwd" />
+				
+				<label for="password-confirm">Confirmez le mot de passe</label>
+				<input type="password" id="password-confirm" name="passwd-confirm" />
+				<br />
+				<input type="hidden" name="action" value="registration" />
+				<button type="submit" class="btn btn-primary">Je m'inscris</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

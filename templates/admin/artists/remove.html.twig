@@ -1,0 +1,18 @@
+{% if hasProducts == true %}
+	<div class="span5 remove-container">
+		<h5>Attention l'artiste <em>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</em> a des produits liés, le supprimer supprimera tous les produits dont il est l'auteur.</h5>
+		<h4>Êtes-vous sûr de vouloir continuer ?</h4>
+		<a class="btn btn-info" href="remove.php?artist={{ artist.id }}"><i class="icon-ok icon-white"></i> Valider</a>
+		<a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> Annuler</a>
+	</div>
+{% else %}
+	<div class="span5 remove-container">
+		<h3 class="remove-confirm-title">Êtes-vous sûr de vouloir supprimer l'artiste suivant ?</h3>
+		<p class="text-warning lead remove-category-title">
+			{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}
+		</p>
+		<a class="btn btn-info" href="remove.php?artist={{ artist.id }}"><i class="icon-ok icon-white"></i> Valider</a>
+		<a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> Annuler</a>
+	</div>
+{% endif %}
+

@@ -1,0 +1,37 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Modifier - Catégories{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Artistes <small>MODIFIER UN ARTISTE</small></h3>
+		<a class="btn btn-success" href="index.php"><i class="icon-circle-arrow-left icon-white"></i> Retour aux artistes</a>
+		<hr />
+		{% if errors %}
+		<div class="alert alert-error">
+			{% for error in errors %}
+				{{ error }}
+				{% if loop.last == false %}
+				<br />
+				{% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
+		<form action="edit.php?artist={{ artist.id }}" method="post">
+			<label for="lastname">Nom *</label>
+			<input type="text" name="lastname" id="lastname" value="{{ artist.lastname }}" />
+			<span class="help-block">Ne remplir que ce champ pour un artiste ayant un nom seul comme <em>Coldplay</em> ou <em>Alizée</em>.</span>
+
+			<label for="firstname">Prénom</label>
+			<input type="text" name="firstname" id="firstname" value="{{ artist.firstname }}" />
+
+			<label for="biography">Biographie</label>
+			<textarea id="biography" name="biography">{{ artist.biography }}</textarea>
+			<br />
+
+			<input type="submit" class="btn btn-primary" value="Valider" />
+			<br />
+			<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+		</form>
+	</div>
+</div>
+{% endblock %}

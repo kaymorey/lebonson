@@ -1,0 +1,11 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Inscription{% endblock %}
+{% block content %}
+	<p>
+	{% if validRegistration == true %}
+		Merci, votre compte sur <em>Le bon son</em> a bien été activé. Vous pouvez dès à présent vous connecter.
+	{% else %}
+		Un problème est survenu lors de la validation de votre compte.
+	{% endif %}
+	</p>
+{% endblock %}

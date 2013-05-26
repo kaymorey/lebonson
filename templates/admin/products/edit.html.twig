@@ -1,0 +1,76 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Backoffice - Produits{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Produits <small>MODIFIER UN PRODUIT</small></h3>
+		<a class="btn btn-success" href="index.php"><i class="icon-circle-arrow-left icon-white"></i> Retour aux produits</a>
+		<hr />
+		{% if errors %}
+		<div class="alert alert-error">
+			{% for error in errors %}
+				{{ error }}
+				{% if loop.last == false %}
+				<br />
+				{% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
+		<form action="edit.php?product={{ product.id }}" method="post" enctype="multipart/form-data">
+			<label for="title">Nom *</label>
+			<input type="text" id="title" name="title" value="{{ product.title }}" />
+
+			<label for="price">Prix *</label>
+			<div class="input-prepend input-append">
+				 <span class="add-on">ex : 22.99</span>
+				<input class="span1" type="text" id="price" name="price" value="{{ product.price }}" />
+				<span class="add-on">€</span>
+			</div>
+
+			<label for="category">Catégorie *</label>
+			<select id="category" name="category">
+				{% for category in categories %}
+				<option value="{{ category.id }}"{% if product.id_category == category.id %} selected{% endif %}>
+					{{ category.title }}
+				</option>
+				{% endfor %}
+			</select>
+
+			<label for="artist">Artiste *</label>
+			<select id="artist" name="artist">
+				{% for artist in artists %}
+				<option value="{{ artist.id }}"{% if product.id_artist == artist.id %} selected{% endif %}>
+					{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}
+				</option>
+				{% endfor %}
+			</select>
+
+			<label for="image">Image d'aperçu</label>
+			<input type="file" id="image" name="image" />
+			<br />
+			<img src="{{ resize(root~'uploads/products/'~product.image, 115, 115, 'outbound') }}" alt="" class="edit-product-img" />
+
+ 			<label for="editor">Label / Maison de disque</label>
+			<input type="text" id="editor" name="editor" value="{{ product.editor }}" />
+
+			<label for="datepicker">Date de parution *</label>
+			<input type="text" id="datepicker" name="date" value="{{ product.date | date('d/m/Y') }}" />
+
+			<label for="description">Description</label>
+			<textarea id="description" name="description">{{ product.description }}</textarea>
+
+			<label for="stock">État *</label>
+			<select id="stock" name="stock">
+				<option value="true"{% if product.stock == 0 %} selected="selected"{% endif %}>En Stock</option>
+				<option value="false"{% if product.stock == 1 %} selected="selected"{% endif %}>Épuisé</option>
+			</select>			
+
+			<br /><br />
+		
+			<input type="submit" class="btn btn-primary" value="Valider" />
+			<br />
+			<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+            	<span class="icon-bar"></span>
+            	<span class="icon-bar"></span>
+            	<span class="icon-bar"></span>
+          	</button>
+			<a class="brand" href="{{ root }}index.php">Le bon son</a>
+			<ul class="nav">
+				{% set categories = getAllCategories() %}
+				{% for category in categories %}
+				<li>
+					<a href="categories.php?category={{ category.slug }}">{{ category.title }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+			<div class="nav-collapse collapse">
+				<form class="navbar-search">
+					<input type="text" class="search-query" placeholder="Rechercher">
+				</form>
+				<ul class="nav pull-right">
+					<li>
+						<a href="{{ root }}cart.php" class="cart"><i class="icon-shopping-cart icon-white"></i> Mon panier 
+							{% if nbProductsCart != 0 %}
+							<span class="badge badge-info">	
+								{{ nbProductsCart }}
+							</span>
+							{% endif %}
+						</a>
+					</li>
+				</ul>
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdow-toggle" data-toggle="dropdown">
+							<i class="icon-user icon-white"></i> Mon compte
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="">Se connecter</a></li>
+							<li><a href="">S'enregistrer</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
