@@ -1,7 +1,4 @@
 <?php
-function getAddressCustomer($idCustomer) {
-	
-}
 function addCustomer($mail, $passwd, $key) {
 	global $db;
 	$req = $db->prepare('INSERT INTO customer(id, email, passwd, firstname, lastname, active, activation_key) VALUES("", :mail, :passwd, "", "", 0, :key)');

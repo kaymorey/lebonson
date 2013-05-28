@@ -18,6 +18,7 @@ require_once(dirname(__FILE__).'/../'.LIB_PATH .'artists.php');
 require_once(dirname(__FILE__).'/../'.LIB_PATH .'categories.php');
 require_once(dirname(__FILE__).'/../'.LIB_PATH .'cart.php');
 require_once(dirname(__FILE__).'/../'.LIB_PATH .'customers.php');
+require_once(dirname(__FILE__).'/../'.LIB_PATH .'address.php');
 require_once(dirname(__FILE__).'/../'.LIB_PATH .'imagine/Image.class.php');
 
 /* Initialisation moteur Twig */
