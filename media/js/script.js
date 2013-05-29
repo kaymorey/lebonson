@@ -243,5 +243,12 @@ $(document).ready(function() {
 		
 			return false;
 		}
-	})
+	});
+	// ---- FIN PANIER ----
+
+	// Adresse de facturation
+	$('form.address fieldset.billing').hide();
+	$('form.address input.different-billing').click(function() {
+		$('form.address fieldset.billing').toggle();
+	});
 });

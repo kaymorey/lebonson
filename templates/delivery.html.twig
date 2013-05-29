@@ -5,10 +5,20 @@
 	<h3>Livraison</h3>
 	{% include 'content/order-steps.html.twig' with {'active' : 'delivery'} %}
 	<div class="row-fluid">
-		<form action="delivery.php" method="post">
+		<form action="delivery.php" method="post" class="address">
 			<fieldset>
 				<legend>Adresse de livraison</legend>
-				<label>Civilité</label>
+				{% if errorsDelivery %}
+				<div class="alert alert-error">
+					{% for error in errorsDelivery %}
+						{{ error }}
+						{% if loop.last == false %}
+						<br />
+						{% endif %}
+					{% endfor %}
+				</div>
+				{% endif %}
+				<label>Civilité *</label>
 				<label class="radio inline" for="civility1">
 				<input type="radio" name="civility" id="civility1" value="Mme" {% if address and address.civility == "Mme" %} checked {% endif %}/>
 					Mme
@@ -24,22 +34,22 @@
 				<br />
 				<br />
 
-				<label for="lastname">Nom</label>
+				<label for="lastname">Nom *</label>
 				<input type="text" id="lastname" name="lastname" value="{%  if address %}address.lastname{% endif %}" />
 
-				<label for="firstname">Prénom</label>
+				<label for="firstname">Prénom *</label>
 				<input type="text" id="firstname" name="firstname" value="{%  if address %}address.firstname{% endif %}" />
 
-				<label for="address1">Adresse</label>
+				<label for="address1">Adresse *</label>
 				<input type="text" id="address1" name="address1" value="{%  if address %}address.address1{% endif %}" />
 
 				<label for="address2">Complément d'adresse</label>
 				<input type="text" id="address2" name="address2" value="{%  if address %}address.address2{% endif %}" />
 
-				<label for="postcode">Code postal</label>
+				<label for="postcode">Code postal *</label>
 				<input type="text" id="postcode" name="postcode" value="{%  if address %}address.postcode{% endif %}" />
 
-				<label for="city">Ville</label>
+				<label for="city">Ville *</label>
 				<input type="text" id="city" name="city" value="{%  if address %}address.city{% endif %}" />
 
 				{% if address is empty %}
@@ -47,14 +57,23 @@
 						<input type="checkbox" id="default" name="default" /> Enregistrer comme adresse par défaut
 					</label>
 				{% endif %}
-				<input type="hidden" name="type" value="delivery" />
 				<label for="billing" class="checkbox">
-					<input type="checkbox" id="billing" name="billing" /> Utiliser une adresse de facturation différente
+					<input type="checkbox" id="billing" name="billing" class="different-billing" /> Utiliser une adresse de facturation différente
 				</label>
 			</fieldset>
-			<fieldset>
+			<fieldset class="billing">
 				<legend>Adresse de facturation</legend>
-				<label>Civilité</label>
+				{% if errorsBilling %}
+				<div class="alert alert-error">
+					{% for error in errorsBilling %}
+						{{ error }}
+						{% if loop.last == false %}
+						<br />
+						{% endif %}
+					{% endfor %}
+				</div>
+				{% endif %}
+				<label>Civilité *</label>
 				<label class="radio inline" for="civility1B">
 				<input type="radio" name="civilityB" id="civility1B" value="Mme" />
 					Mme
@@ -70,25 +89,27 @@
 				<br />
 				<br />
 
-				<label for="lastnameB">Nom</label>
+				<label for="lastnameB">Nom *</label>
 				<input type="text" id="lastnameB" name="lastnameB" />
 
-				<label for="firstnameB">Prénom</label>
+				<label for="firstnameB">Prénom *</label>
 				<input type="text" id="firstnameB" name="firstnameB" />
 
-				<label for="address1B">Adresse</label>
+				<label for="address1B">Adresse *</label>
 				<input type="text" id="address1B" name="address1B" />
 
 				<label for="address2B">Complément d'adresse</label>
 				<input type="text" id="address2B" name="address2B" />
 
-				<label for="postcodeB">Code postal</label>
+				<label for="postcodeB">Code postal *</label>
 				<input type="text" id="postcodeB" name="postcodeB" />
 
-				<label for="cityB">Ville</label>
+				<label for="cityB">Ville *</label>
 				<input type="text" id="cityB" name="cityB" />
 			</fieldset>
 			<button type="submit" class="btn btn-primary">Valider</button>
+			<br />
+			<small>Les champs suivis d'un astérisque sont obligatoires.</small>
 		</form>
 	</div>
 </div>
