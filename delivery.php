@@ -13,6 +13,18 @@
 
 	$errors = array();
 	$errorsB = array();
+	$lastname = null;
+	$firstname = null;
+	$address1 = null;
+	$address2 = null;
+	$postcode = null;
+	$city = null;
+	$lastnameB = null;
+	$firstnameB = null;
+	$address1B = null;
+	$address2B = null;
+	$postcodeB = null;
+	$cityB = null;
 	$idCustomer = $_SESSION['customer'];
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -141,7 +153,7 @@
 				}
 				else {
 					// Ajouter l'adresse en base
-					$addAddress = addAddress($civility, $firstname, $lastname, $address1, $address2, $postcode, $city, $default);
+					$addAddress = addAddress($idCustomer, $civility, $firstname, $lastname, $address1, $address2, $postcode, $city, $default, 'delivery');
 					if(!$addAddress) {
 						$errors[] = 'Erreur lors de l\'exécution de la requête';
 					}
@@ -155,7 +167,7 @@
 				}
 				else {
 					// Ajouter l'adresse en base
-					$addAddress = addAddress($civilityB, $firstnameB, $lastnameB, $address1B, $address2B, $postcodeB, $cityB, 0);
+					$addAddress = addAddress($idCustomer, $civilityB, $firstnameB, $lastnameB, $address1B, $address2B, $postcodeB, $cityB, 0, 'billing');
 					if(!$addAddress) {
 						$errors[] = 'Erreur lors de l\'exécution de la requête';
 					}
@@ -175,5 +187,17 @@
 		"MEDIA_PATH" => MEDIA_PATH,
 		"address" => $address,
 		"errorsDelivery" => $errors,
-		"errorsBilling" => $errorsB
+		"errorsBilling" => $errorsB,
+		"lastname" => $lastname,
+		"firstname" => $firstname,
+		"address1" => $address1,
+		"address2" => $address2,
+		"postcode" => $postcode,
+		"city" => $city,
+		"lastnameB" => $lastnameB,
+		"firstnameB" => $firstnameB,
+		"address1B" => $address1B,
+		"address2B" => $address2B,
+		"postcodeB" => $postcodeB,
+		"cityB" => $cityB,
 	)));

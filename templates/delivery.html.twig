@@ -35,22 +35,22 @@
 				<br />
 
 				<label for="lastname">Nom *</label>
-				<input type="text" id="lastname" name="lastname" value="{%  if address %}address.lastname{% endif %}" />
+				<input type="text" id="lastname" name="lastname" value="{% if lastname %}{{ lastname }}{% elseif address %}{{ address.lastname }}{% endif %}" />
 
 				<label for="firstname">Prénom *</label>
-				<input type="text" id="firstname" name="firstname" value="{%  if address %}address.firstname{% endif %}" />
+				<input type="text" id="firstname" name="firstname" value="{% if firstname %}{{ firstname }}{% elseif address %}{{ address.firstname }}{% endif %}" />
 
 				<label for="address1">Adresse *</label>
-				<input type="text" id="address1" name="address1" value="{%  if address %}address.address1{% endif %}" />
+				<input type="text" id="address1" name="address1" value="{% if address1 %}{{ address1 }}{% elseif address %}{{ address.address1 }}{% endif %}" />
 
 				<label for="address2">Complément d'adresse</label>
-				<input type="text" id="address2" name="address2" value="{%  if address %}address.address2{% endif %}" />
+				<input type="text" id="address2" name="address2" value="{% if address2 %}{{ address2 }}{% elseif address %}{{ address.address2 }}{% endif %}" />
 
 				<label for="postcode">Code postal *</label>
-				<input type="text" id="postcode" name="postcode" value="{%  if address %}address.postcode{% endif %}" />
+				<input type="text" id="postcode" name="postcode" value="{% if postcode %}{{ postcode }}{% elseif address %}{{ address.postcode }}{% endif %}" />
 
 				<label for="city">Ville *</label>
-				<input type="text" id="city" name="city" value="{%  if address %}address.city{% endif %}" />
+				<input type="text" id="city" name="city" value="{% if city %}{{ city }}{% elseif address %}{{ address.city }}{% endif %}" />
 
 				{% if address is empty %}
 					<label for="default" class="checkbox">
@@ -90,22 +90,22 @@
 				<br />
 
 				<label for="lastnameB">Nom *</label>
-				<input type="text" id="lastnameB" name="lastnameB" />
+				<input type="text" id="lastnameB" name="lastnameB" value="{% if lastnameB %}{{ lastnameB }}{% endif %}" />
 
 				<label for="firstnameB">Prénom *</label>
-				<input type="text" id="firstnameB" name="firstnameB" />
+				<input type="text" id="firstnameB" name="firstnameB" value="{% if firstnameB %}{{ firstnameB }}{% endif %}" />
 
 				<label for="address1B">Adresse *</label>
-				<input type="text" id="address1B" name="address1B" />
+				<input type="text" id="address1B" name="address1B" value="{% if address1B %}{{ address1B }}{% endif %}" />
 
 				<label for="address2B">Complément d'adresse</label>
-				<input type="text" id="address2B" name="address2B" />
+				<input type="text" id="address2B" name="address2B" value="{% if address2B %}{{ address2B }}{% endif %}" />
 
 				<label for="postcodeB">Code postal *</label>
-				<input type="text" id="postcodeB" name="postcodeB" />
+				<input type="text" id="postcodeB" name="postcodeB" value="{% if postcodeB %}{{ postcodeB }}{% endif %}" />
 
 				<label for="cityB">Ville *</label>
-				<input type="text" id="cityB" name="cityB" />
+				<input type="text" id="cityB" name="cityB" value="{% if cityB %}cityB{% endif %}" />
 			</fieldset>
 			<button type="submit" class="btn btn-primary">Valider</button>
 			<br />
