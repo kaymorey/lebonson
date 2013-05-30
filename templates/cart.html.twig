@@ -6,15 +6,6 @@
 	{% if cart is not empty %}
 	{% include 'content/order-steps.html.twig' with {'active' : 'cart'} %}
 	{% include 'content/cart.html.twig' with {'cart' : cart} %}
-	<div class="pull-right text-right summary">
-		<p class="lead text-info">Total : <span class="total-price-cart">{{ totalPrice }}</span>€</p>
-		<form method="post" action="authentication.php">
-			<label class="checkbox">
-				<input type="checkbox" name="conditions" class="conditions" /><small>En cochant cette case je reconnais avoir pris connaissance des conditions générales de vente de <em>Le bon son</em></small>
-			</label>
-			<button type="submit" class="btn btn-primary submit">Suivant</a>
-		</form>
-	</div>
 	{% else %}
 	<p>Votre panier est vide.</p>
 	{% endif %}

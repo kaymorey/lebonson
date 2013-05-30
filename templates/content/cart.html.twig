@@ -32,3 +32,14 @@
 		{% endfor %}
 	</tbody>
 </table>
+<div class="pull-right text-right summary">
+	<p class="lead text-info">Total : <span class="total-price-cart">{{ totalPrice }}</span>€</p>
+	{% if confirmation is not defined %}
+	<form method="post" action="authentication.php">
+		<label class="checkbox">
+			<input type="checkbox" name="conditions" class="conditions" /><small>En cochant cette case je reconnais avoir pris connaissance des conditions générales de vente de <em>Le bon son</em></small>
+		</label>
+		<button type="submit" class="btn btn-primary submit">Suivant</a>
+	</form>
+	{% endif %}
+</div>
