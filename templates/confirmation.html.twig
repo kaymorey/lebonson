@@ -1,0 +1,7 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Mon panier{% endblock %}
+{% block content %}
+	<h3>Confirmation de la commande</h3>
+	{% include 'content/order-steps.html.twig' with {'active' : 'confirmation'} %}
+	{% include 'content/cart.html.twig' with {'cart' : cart, 'confirmation' : 'true'} %}
+{% endblock %}

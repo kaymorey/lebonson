@@ -1,0 +1,34 @@
+<table class="table table-hover cart">
+	<thead>
+		<tr>
+			<th>Produit</th>
+			<th>Quantité</th>
+			<th>Prix unitaire</th>
+			<th>Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set totalPrice = 0 %}
+		{% for product, quantity in cart %}
+		{% set product = getProductById(product) %}
+		{% set artist = getArtistById(product.id_artist) %}
+		{% set totalPriceProduct = quantity * product.price %}
+		{% set totalPrice = totalPrice + totalPriceProduct %}
+		<tr>
+			<td><img src="{{ resize(root~'uploads/products/'~product.image, 50, 50, 'outbound') }}" alt="" /> {{ product.title }} - <small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small></td>
+			<td class="center" data-id="{{ product.id }}">
+			{% if confirmation %}
+				{{ quantity }}
+			{% else %}
+				<a href="#" class="change-quantity minus"><i class="icon-minus"></i></a>
+				<input type="text" class="quantity" value="{{ quantity }}" />
+				<a href="#" class="change-quantity plus"><i class="icon-plus"></i></a>
+				<a href="#" class="remove-product"><i class="icon-trash"></i></a>
+			{% endif %}
+			</td>
+			<td class="center td-price"><span class="price">{{ product.price }}</span>€</td>
+			<td class="td-total-price"><p class="lead text-right"><span class="total-price">{{ totalPriceProduct }}</span>€</p></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
