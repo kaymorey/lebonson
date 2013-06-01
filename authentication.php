@@ -8,12 +8,13 @@
 	$errorsConnexion = array();
 	$addCustomer = null;
 	$mail = null;
+	$cart = true;
 
 	if(!isset($_SESSION['cart'])) {
 		header('Location: index.php');
 	}
 	if(isset($_SESSION['customer']) && isCustomer($_SESSION['customer'])) {
-		// Redirection livraison
+		header('Location: delivery.php');
 	}
 	if(isset($_POST['action']) && $_POST['action'] == 'registration') {
 		include 'registration.php';
@@ -24,7 +25,7 @@
 		$errorsConnexion = $errors;
 	}
 	else if(!isset($_POST['conditions']) || !$_POST['conditions']) {
-		header('Location: cart.php');
+		$cart = false;
 	}
 
 	echo($template->render(array(
@@ -32,5 +33,6 @@
 		"errorsRegistration" => $errorsRegistration,
 		"errorsConnexion" => $errorsConnexion,
 		"addCustomer" => $addCustomer,
-		"mail" => $mail
+		"mail" => $mail,
+		"cart" => $cart
 	)));

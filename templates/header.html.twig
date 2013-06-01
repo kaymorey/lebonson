@@ -31,15 +31,16 @@
 					</li>
 				</ul>
 				<ul class="nav pull-right">
-					<li class="dropdown">
-						<a href="#" class="dropdow-toggle" data-toggle="dropdown">
+					<li>
+						{% if session('customer') %}
+						<a href="#">
 							<i class="icon-user icon-white"></i> Mon compte
-							<b class="caret"></b>
 						</a>
-						<ul class="dropdown-menu">
-							<li><a href="">Se connecter</a></li>
-							<li><a href="">S'enregistrer</a></li>
-						</ul>
+						{% else %}
+						<a href="authentication.php">
+							<i class="icon-user icon-white"></i> Connexion / inscription
+						</a>
+						{% endif %}
 					</li>
 				</ul>
 			</div>

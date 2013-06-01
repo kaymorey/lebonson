@@ -1,0 +1,8 @@
+<div class="alert alert-error">
+	{% for error in errors %}
+		{{ error }}
+		{% if loop.last == false %}
+		<br />
+		{% endif %}
+	{% endfor %}
+</div>

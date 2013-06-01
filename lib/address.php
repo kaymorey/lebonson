@@ -66,3 +66,13 @@ function getLastAddress($idCustomer, $type) {
 		return $address;
 	}
 }
+function getAddressById($idAddress) {
+	global $db;
+	$req = $db->prepare('SELECT address.* FROM address WHERE address.id = :idAddress');
+	$req->execute(array(
+		':idAddress' => $idAddress
+	));
+
+	$address = $req->fetch();
+	return $address;
+}

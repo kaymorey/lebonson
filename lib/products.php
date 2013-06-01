@@ -100,6 +100,16 @@ function getArtistProduct($idProduct) {
 	$product = $req->fetch();
 	return $product['id_artist'];
 }
+function getPriceProduct($idProduct) {
+	global $db;
+	$req = $db->prepare('SELECT product.price FROM product WHERE product.id = :idProduct');
+	$req->execute(array(
+		':idProduct' => $idProduct
+	));
+
+	$product = $req->fetch();
+	return $product['price'];
+}
 function addProduct($idArtist, $idCategory, $title, $slug, $price, $image, $editor, $date, $description, $stock) {
 	global $db;
 	$req = $db->prepare('INSERT INTO product(id, id_artist, id_category, title, slug, price, image, editor, date, description, in_stock)

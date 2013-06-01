@@ -3,20 +3,15 @@
 {% block content %}
 <div class="container-fluid">
 	<h3>Identification</h3>
-	{% include 'content/order-steps.html.twig' with {'active' : 'authentication'} %}
+	{% if cart %}
+		{% include 'content/order-steps.html.twig' with {'active' : 'authentication'} %}
+	{% endif %}
 	<div class="row-fluid">
 		<div class="span6">
 			<h4>Vous possédez déjà un compte ?</h4>
 			<p class="lead">Connectez-vous</p>
 			{% if errorsConnexion %}
-			<div class="alert alert-error">
-				{% for error in errorsConnexion %}
-					{{ error }}
-					{% if loop.last == false %}
-					<br />
-					{% endif %}
-				{% endfor %}
-			</div>
+				{% include 'content/errors.html.twig' with {'errors' : 'errorsConnexion'} %}
 			{% endif %}
 			<form method="post" action="authentication.php">
 				<label for="mail">Email</label>
@@ -26,6 +21,8 @@
 				<input type="password" id="password" name="passwd" />
 				<br />
 				<input type="hidden" name="action" value="connexion" />
+				<!-- Savoir si l'utilisateur est dans le tunnel d'achat -->
+				<input type="hidden" name="cart" {% if cart %}value="true"{% else %}value="false"{% endif %} />
 				<button type="submit" class="btn btn-primary">Connexion</button>
 			</form>
 		</div>
@@ -33,14 +30,7 @@
 			<h4>Pas encore de compte ?</h4>
 			<p class="lead">Inscrivez-vous</p>
 			{% if errorsRegistration %}
-			<div class="alert alert-error">
-				{% for error in errorsRegistration %}
-					{{ error }}
-					{% if loop.last == false %}
-					<br />
-					{% endif %}
-				{% endfor %}
-			</div>
+				{% include 'content/errors.html.twig' with {'errors' : 'errorsRegistration'} %}
 			{% elseif addCustomer %}
 			<div class="alert alert-success">
 				Merci, votre inscription a bien été prise en compte.<br />

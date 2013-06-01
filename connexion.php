@@ -35,6 +35,11 @@
 		}
 		if(empty($errors)) {
 			$_SESSION['customer'] = $customer;
-			header('Location: delivery.php');
+			if($_POST['cart'] == "true") {
+				header('Location: delivery.php');
+			}
+			else {
+				header('Location: index.php');
+			}
 		}
 	}

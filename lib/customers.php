@@ -14,11 +14,11 @@ function addCustomer($mail, $passwd, $key) {
 	}
 	return true;
 }
-function isCustomer($mail) {
+function isCustomer($idCustomer) {
 	global $db;
-	$req = $db->prepare('SELECT customer.id FROM customer WHERE customer.email=:mail');
+	$req = $db->prepare('SELECT customer.id FROM customer WHERE customer.id = :idCustomer');
 	$req->execute(array(
-		':mail' => $mail
+		':idCustomer' => $idCustomer
 	));
 
 	$customer = $req->fetch();

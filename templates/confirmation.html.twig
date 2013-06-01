@@ -3,5 +3,28 @@
 {% block content %}
 	<h3>Confirmation de la commande</h3>
 	{% include 'content/order-steps.html.twig' with {'active' : 'confirmation'} %}
+	{% if errros %}
+		{% include 'content/errors.html.twig' with {'errors' : errors} %}
+	{% endif %}
+	<h5>Rappel du panier</h5>
 	{% include 'content/cart.html.twig' with {'cart' : cart, 'confirmation' : 'true'} %}
+	<h5>Adresse de livraison</h5>
+	<address>
+		<strong>{{ delivery.firstname }} {{ delivery.lastname }}</strong><br />
+		{{ delivery.address1 }}<br />
+		{% if delivery.address2 is not empty %}
+		{{ delivery.address2 }}<br />
+		{% endif %}
+		{{ delivery.postcode }} {{ delivery.city }}<br />
+	</address>
+	<h5>Adresse de facturation</h5>
+	<address>
+		<strong>{{ billing.firstname }} {{ billing.lastname }}</strong><br />
+		{{ billing.address1 }}<br />
+		{% if billing.address2 is not empty %}
+		{{ billing.address2 }}<br />
+		{% endif %}
+		{{ billing.postcode }} {{ billing.city }}<br />
+	</address>
+	<a href="confirmation.php?d={{ delivery.id }}&b={{ billing.id }}&confirm=true" class="btn btn-large btn-primary">Confirmer ma commande</a>
 {% endblock %}

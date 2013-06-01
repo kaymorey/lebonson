@@ -38,3 +38,14 @@ $resizeImageFunction = new Twig_SimpleFunction('resize', function($image, $width
 	return Image::resize($image, $width, $height, $mode);
 });
 $tpl->addFunction($resizeImageFunction);
+
+// Session
+$getSessionFunction = new Twig_SimpleFunction('session', function($title) {
+	if(isset($_SESSION[$title])) {
+		return $_SESSION[$title];
+	}
+	else {
+		return false;
+	}
+});
+$tpl->addFunction($getSessionFunction);
