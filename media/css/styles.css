@@ -32,3 +32,11 @@ div.cart table.cart .icon-trash {
 div.cart .summary {
   width: 30%;
 }
+#footer {
+  text-align: center;
+  background-color: #F5F5F5;
+  height: 60px;
+}
+#footer .container p {
+  margin: 20px 0;
+}
