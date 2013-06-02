@@ -8,9 +8,13 @@
 		</div>
 		<div class="span9">
 			<div class="row-fluid">
+			{% if products is empty %}
+				<p>Aucun résultat.</p>
+			{% else %}
 			{% for product in products %}
 			{% include 'list/products.html.twig' with {'products' : products} %}
 			{% endfor %}
+			{% endif %}
 			</div>
 		</div>
 	</div>
