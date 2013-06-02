@@ -8,9 +8,10 @@
 		header('Location: index.php');
 	}
 	$product = getProductBySlug($_GET['product']);
-
+	$category = getCategoryById($product['id_category']);
 
 	echo($template->render(array(
 		"MEDIA_PATH" => MEDIA_PATH,
-		"product" => $product
+		"product" => $product,
+		"categoryMenu" => $category['slug']
 	)));
