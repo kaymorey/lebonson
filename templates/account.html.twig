@@ -1,0 +1,13 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Mon compte{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<h3>Mon compte</h3>
+	<h5>Mes commandes</h5>
+	{% for order in orders %}
+		<strong>
+			Commande du {{ order.date | date('d/m/Y') }}
+		</strong>
+	{% endfor %}
+</div>
+{% endblock %}

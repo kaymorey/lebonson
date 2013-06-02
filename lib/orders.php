@@ -1,11 +1,12 @@
 <?php
-function addOrder($delivery, $billing) {
+function addOrder($idCustomer, $delivery, $billing) {
 	$date = new DateTime();
 	$amount = getAmountCart();
 
 	global $db;
-	$req = $db->prepare('INSERT INTO orders(id, id_delivery_address, id_billing_address, date, status, amount) VALUES("", :delivery, :billing, :date, "En préparation", :amount)');
+	$req = $db->prepare('INSERT INTO orders(id, id_customer, id_delivery_address, id_billing_address, date, status, amount) VALUES("", :idCustomer, :delivery, :billing, :date, "En préparation", :amount)');
 	$req->execute(array(
+		':idCustomer' => $idCustomer,
 		':delivery' => $delivery,
 		':billing' => $billing,
 		':date' => $date->format('Y-m-d H:i:s'),
@@ -35,4 +36,14 @@ function getLastOrder() {
 
 	$order = $req->fetch();
 	return $order['id'];
+}
+function getOrdersByCustomer($idCustomer) {
+	global $db;
+	$req = $db->prepare('SELECT orders.* FROM orders WHERE orders.id_customer = :idCustomer');
+	$req->execute(array(
+		':idCustomer' => $idCustomer
+	));
+
+	$orders = $req->fetchAll();
+	return $orders;
 }

@@ -19,14 +19,13 @@
 	$billing = getAddressById($_GET['b']);
 
 	if(isset($_GET['confirm']) && $_GET['confirm'] == "true") {
-		$addOrder = addOrder($delivery['id'], $billing['id']);
+		$addOrder = addOrder($_SESSION['customer'], $delivery['id'], $billing['id']);
 		if(!$addOrder) {
 			$errors[] = 'Erreur lors de la confirmation de la commande.'; 
 		} 
 		else {
 			emptyCart();
-			echo("youpi");
-			exit;
+			header('Location: account.php');
 		}
 	}
 
