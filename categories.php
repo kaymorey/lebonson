@@ -41,6 +41,7 @@
 
 	echo($template->render(array(
 		"MEDIA_PATH" => MEDIA_PATH,
+		"categoryMenu" => $category['slug'],
 		"nbProductsCart" => $nbProductsCart,
 		"category" => $category,
 		"products" => $products,

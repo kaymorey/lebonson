@@ -5,5 +5,6 @@
 	session_start();
 
 	echo($template->render(array(
-		"MEDIA_PATH" => MEDIA_PATH
+		"MEDIA_PATH" => MEDIA_PATH,
+		"categoryMenu" => "account"
 	));

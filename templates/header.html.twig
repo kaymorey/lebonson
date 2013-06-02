@@ -10,7 +10,7 @@
 			<ul class="nav">
 				{% set categories = getAllCategories() %}
 				{% for category in categories %}
-				<li>
+				<li{% if categoryMenu and categoryMenu == category.slug %} class="active"{% endif %}>
 					<a href="categories.php?category={{ category.slug }}">{{ category.title }}</a>
 				</li>
 				{% endfor %}
@@ -20,7 +20,7 @@
 					<input type="text" class="search-query" placeholder="Rechercher">
 				</form>
 				<ul class="nav pull-right">
-					<li>
+					<li{% if categoryMenu and categoryMenu == "cart"%} class="active"{% endif %}>
 						<a href="{{ root }}cart.php" class="cart"><i class="icon-shopping-cart icon-white"></i> Mon panier 
 							{% if nbProductsCart != 0 %}
 							<span class="badge badge-info">	
@@ -31,17 +31,19 @@
 					</li>
 				</ul>
 				<ul class="nav pull-right">
-					<li>
-						{% if session('customer') %}
+					{% if session('customer') %}
+					<li{% if categoryMenu and categoryMenu == "account"%} class="active"{% endif %}>
 						<a href="#">
 							<i class="icon-user icon-white"></i> Mon compte
 						</a>
-						{% else %}
+					</li>
+					{% else %}
+					<li{% if categoryMenu and categoryMenu == "authentication"%} class="active"{% endif %}>
 						<a href="authentication.php">
 							<i class="icon-user icon-white"></i> Connexion / inscription
 						</a>
-						{% endif %}
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>

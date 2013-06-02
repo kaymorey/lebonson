@@ -2,6 +2,10 @@
 {% block title %}{{ category.title }}{% endblock %}
 {% block content %}
 <div class="container-fluid">
+	<ul class="breadcrumb">
+		<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+		<li class="active">{{ category.title }}</li>
+	</ul>
 	<div class="row-fluid">
 		<div class="span3">
 			{% include 'content/search.html.twig' with {'mainArtists' : mainArtists} %}

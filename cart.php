@@ -35,7 +35,8 @@
 
 	echo($template->render(array(
 		"MEDIA_PATH" => MEDIA_PATH,
+		"categoryMenu" => "cart",
 		"nbProductsCart" => $nbProductsCart,
 		"cart" => $_SESSION['cart'],
-		"product" => $addProduct
+		"product" => $addProduct,
 	)));

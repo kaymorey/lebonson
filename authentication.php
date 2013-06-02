@@ -30,6 +30,7 @@
 
 	echo($template->render(array(
 		"MEDIA_PATH" => MEDIA_PATH,
+		"categoryMenu" => "authentication"
 		"errorsRegistration" => $errorsRegistration,
 		"errorsConnexion" => $errorsConnexion,
 		"addCustomer" => $addCustomer,
