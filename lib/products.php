@@ -51,7 +51,13 @@ function getProductByTitleAndArtist($title, $idArtist) {
 }
 function getProductsByMultipleArgs($idCategory, $sort, $date, $idArtist) {
 	global $db;
-	$sql = 'SELECT * FROM product WHERE product.id_category = :idCategory AND';
+
+	if($sort != null && $sort == "best") {
+		$sql = 'SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product WHERE product.id_category = :idCategory AND';
+	}
+	else {
+		$sql = 'SELECT * FROM product WHERE product.id_category = :idCategory AND';
+	}
 	$parameters = array();
 	$parameters[':idCategory'] = $idCategory;
 
@@ -86,18 +92,22 @@ function getProductsByMultipleArgs($idCategory, $sort, $date, $idArtist) {
 			$parameters[':to'] = $to->format('Y-m-d');
 		}
 	}
-	$sql = substr($sql, 0, -4);
+	if(substr($sql, -4, 4) == ' AND') {
+		$sql = substr($sql, 0, -4);
+	}
 	if($sort != null) {
-		if($sort == 'best') {
-			// ...
+		if($sort == "best") {
+			$sql .= ' GROUP BY product.id ORDER BY total LIMIT 0,5';
 		}
-		if($sort == 'titleza') {
-			$sort = 'title DESC';
+		else {
+			if($sort == 'titleza') {
+				$sort = 'title DESC';
+			}
+			elseif($sort == 'pricedesc') {
+				$sort = 'price DESC';
+			}
+			$sql .= ' ORDER BY '.$sort;
 		}
-		elseif($sort == 'pricedesc') {
-			$sort = 'price DESC';
-		}
-		$sql .= ' ORDER BY '.$sort;
 	}
 	$req = $db->prepare($sql);
 	$req->execute($parameters);
@@ -269,4 +279,14 @@ function isProduct($title, $idArtist, $idProduct = null) {
 	}
 
 	return "false";
+}
+function getBestProducts() {
+	global $db;
+	$req = $db->prepare('SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product WHERE product.id_category = :idCategory GROUP BY product.id ORDER BY total LIMIT 0,5');
+	$req->execute(array(
+		':idCategory' => $idCategory
+	));
+	$products = $req->fetchAll();
+
+	return $products;
 }
