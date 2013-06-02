@@ -29,6 +29,21 @@ function isCustomer($idCustomer) {
 		return true;
 	}
 }
+function isCustomerMail($mail) {
+	global $db;
+	$req = $db->prepare('SELECT customer.id FROM customer WHERE customer.email = :mail');
+	$req->execute(array(
+		':mail' => $mail
+	));
+
+	$customer = $req->fetch();
+	if(empty($customer)) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
 function validCustomer($mail, $key) {
 	global $db;
 	// Vérifier si le mail est enregistré en base avec cette clé d'activation
@@ -66,4 +81,19 @@ function checkCustomer($mail, $passwd) {
 	}
 	$idCustomer = $result['id'];
 	return $idCustomer;
+}
+function isActiveCustomer($idCustomer) {
+	global $db;
+	$req = $db->prepare('SELECT customer.id FROM customer WHERE customer.id = :idCustomer AND customer.active = 1');
+	$req->execute(array(
+		':idCustomer' => $idCustomer
+	));
+	$customer = $req->fetch();
+	if(empty($customer)) {
+		return false;
+	}
+	else {
+		return true;
+	}
+
 }

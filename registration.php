@@ -1,4 +1,6 @@
 <?php
+	$errors = array();
+
 	if(!isset($_POST['mail']) || !isset($_POST['passwd']) || !isset($_POST['passwd-confirm'])) {
 		$errors[] = 'Formulaire non conforme.';
 	}
@@ -34,7 +36,7 @@
 			if($passwd != $passwdConfirm) {
 				$errors[] = 'Les mots de passe doivent être identiques.';
 			}
-			if(isCustomer($mail)) {
+			if(isCustomerMail($mail)) {
 				$errors[] = 'Un utilisateur est déjà enregistré avec cette adresse email.';
 			}
 		}

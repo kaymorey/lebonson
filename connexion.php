@@ -1,4 +1,6 @@
 <?php
+	$errors = array();
+	
 	if(!isset($_POST['mail']) || !isset($_POST['passwd'])) {
 		$errors[] = 'Formulaire non conforme.';
 	}
@@ -31,6 +33,9 @@
 			$customer = checkCustomer($mail, $passwd);
 			if(!$customer) {
 				$errors[] = 'L\'identifiant ou le mot de passe est erroné.';
+			}
+			elseif(!isActiveCustomer($customer)) {
+				$errors[] = 'Votre compte n\'a pas encore été activé';
 			}
 		}
 		if(empty($errors)) {

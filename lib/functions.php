@@ -27,7 +27,7 @@ function sendRegistrationMail($mail, $key) {
 		Cher client,<br /><br />	
 		Nous vous souhaitons la bienvenue sur Le bon son.<br />
 		Les identifiants de votre compte viennent d'être créés. Toufefois afin de valider votre inscription veuillez activer votre compte en cliquant sur le lien suivant.<br />
-		<a href=\"http://katiamoreira.alwaysdata.net/lebonson/registration.php?valid_register=$mail&key=$key\">http://katiamoreira.alwaysdata.net/lebonson/registration.php?valid_register=$mailtext&key=$key</a>
+		<a href=\"http://katiamoreira.alwaysdata.net/lebonson/registration.php?valid_register=$mail&key=$key\">http://katiamoreira.alwaysdata.net/lebonson/registration.php?valid_register=$mail&key=$key</a>
 		<br /><br />
 		A bientôt sur <a href=\"http://katiamoreira.alwaysdata.net/lebonson\">Le bon son</a>.
 	<hr />

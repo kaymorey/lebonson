@@ -11,7 +11,7 @@
 			<h4>Vous possédez déjà un compte ?</h4>
 			<p class="lead">Connectez-vous</p>
 			{% if errorsConnexion %}
-				{% include 'content/errors.html.twig' with {'errors' : 'errorsConnexion'} %}
+				{% include 'content/errors.html.twig' with {'errors' : errorsConnexion} %}
 			{% endif %}
 			<form method="post" action="authentication.php">
 				<label for="mail">Email</label>
@@ -30,7 +30,7 @@
 			<h4>Pas encore de compte ?</h4>
 			<p class="lead">Inscrivez-vous</p>
 			{% if errorsRegistration %}
-				{% include 'content/errors.html.twig' with {'errors' : 'errorsRegistration'} %}
+				{% include 'content/errors.html.twig' with {'errors' : errorsRegistration} %}
 			{% elseif addCustomer %}
 			<div class="alert alert-success">
 				Merci, votre inscription a bien été prise en compte.<br />
