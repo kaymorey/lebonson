@@ -47,3 +47,13 @@ function getOrdersByCustomer($idCustomer) {
 	$orders = $req->fetchAll();
 	return $orders;
 }
+function getOrderDetails($idOrder) {
+	global $db;
+	$req = $db->prepare('SELECT order_detail.* FROM order_detail WHERE order_detail.id_order = :idOrder');
+	$req->execute(array(
+		':idOrder' => $idOrder
+	));
+
+	$details = $req->fetchAll();
+	return $details;
+}

@@ -2,12 +2,41 @@
 {% block title %}Mon compte{% endblock %}
 {% block content %}
 <div class="container-fluid">
-	<h3>Mon compte</h3>
-	<h5>Mes commandes</h5>
-	{% for order in orders %}
-		<strong>
-			Commande du {{ order.date | date('d/m/Y') }}
-		</strong>
-	{% endfor %}
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>Mon compte</h3>
+			<h5>Mes commandes</h5>
+			{% for order in orders %}
+				{% set details = getOrderDetails(order.id) %}
+				<p>
+					<strong>Commande du {{ order.date | date('d/m/Y') }}</strong>
+				</p>
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th>
+								Articles commandés
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail in details %}
+						{% set product = getProductById(detail.id_product) %}
+						{% set artist = getArtistById(product.id_artist) %}
+						<tr>
+							<td>
+								<span class="text-info"><strong>x {{ detail.quantity }}</strong></span> {% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }} - {{ product.title }}
+							</td>
+							<td>
+								Voir détails
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endfor %}
+		</div>
+	</div>
 </div>
 {% endblock %}

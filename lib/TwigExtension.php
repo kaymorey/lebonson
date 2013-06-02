@@ -33,6 +33,13 @@ $getProductByIdFunction = new Twig_SimpleFunction('getProductById', function ($i
 });
 $tpl->addFunction($getProductByIdFunction);
 
+// Commandes
+$getOrderDetailsFunction = new Twig_SimpleFunction('getOrderDetails', function ($idOrder) {
+	return getOrderDetails($idOrder);
+});
+$tpl->addFunction($getOrderDetailsFunction);
+
+
 // Imagine
 $resizeImageFunction = new Twig_SimpleFunction('resize', function($image, $width, $height, $mode) {
 	return Image::resize($image, $width, $height, $mode);
