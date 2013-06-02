@@ -1,0 +1,70 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Livraison{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<h3>Mon compte</h3>
+	<ul class="breadcrumb">
+		<li><a href="account.php?customer={{ customer }}">Mon compte</a> <span class="divider">/</span></li>
+		<li class="active">Commande du {{ order.date | date('d/m/Y') }}</li>
+	</ul>
+	{% set details = getOrderDetails(order.id) %}
+	{% if order.status == "En préparation" %}
+	<p class="text-info">Commande en préparation</p>
+	{% elseif order.status == "Expédiée" %}
+	<p class="text-success">Commande expédiée</p>
+	{% else %}
+	<p class="text-error">Commande annulée</p>
+	{% endif %}
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>
+					Articles commandés
+				</th>
+				<th>
+					Quantité
+				</th>
+				<th>
+					Prix
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for detail in details %}
+			{% set product = getProductById(detail.id_product) %}
+			{% set artist = getArtistById(product.id_artist) %}
+			<tr>
+				<td>
+					<img src="{{ resize(root~'uploads/products/'~product.image, 50, 50, 'outbound') }}" alt="" />{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }} - {{ product.title }}
+				</td>
+				<td>
+					{{ detail.quantity }}
+				</td>
+				<td>
+					{{ product.price }}€
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<p class="lead">Total : {{ order.amount }}€</p>
+	<h5>Adresse de livraison</h5>
+	<address>
+		<strong>{{ delivery.firstname }} {{ delivery.lastname }}</strong><br />
+		{{ delivery.address1 }}<br />
+		{% if delivery.address2 is not empty %}
+		{{ delivery.address2 }}<br />
+		{% endif %}
+		{{ delivery.postcode }} {{ delivery.city }}<br />
+	</address>
+	<h5>Adresse de facturation</h5>
+	<address>
+		<strong>{{ billing.firstname }} {{ billing.lastname }}</strong><br />
+		{{ billing.address1 }}<br />
+		{% if billing.address2 is not empty %}
+		{{ billing.address2 }}<br />
+		{% endif %}
+		{{ billing.postcode }} {{ billing.city }}<br />
+	</address>
+</div>
+{% endblock %}

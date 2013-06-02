@@ -57,3 +57,13 @@ function getOrderDetails($idOrder) {
 	$details = $req->fetchAll();
 	return $details;
 }
+function getOrderById($idOrder) {
+	global $db;
+	$req = $db->prepare('SELECT * FROM orders WHERE orders.id = :idOrder');
+	$req->execute(array(
+		':idOrder' => $idOrder
+	));
+
+	$order = $req->fetch();
+	return $order;
+}
