@@ -1,5 +1,16 @@
 {% extends 'layout/base.html.twig' %}
 {% block title %}Accueil{% endblock %}
 {% block content %}
-It works !
+<div class="row-fluid">
+	<h4>Meilleures ventes</h4>
+	{% for product in bestProducts %}
+	{% include 'list/products.html.twig' with {'nbProductsRow' : 6} %}
+	{% endfor %}
+</div>
+<div class="row-fluid">
+	<h4>Derniers produits</h4>
+	{% for product in lastProducts %}
+	{% include 'list/products.html.twig' with {'nbProductsRow' : 6} %}
+	{% endfor %}
+</div>
 {% endblock %}

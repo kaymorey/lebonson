@@ -1,8 +1,12 @@
 {% set artist = getArtistById(product.id_artist) %}
-{% if loop.index % 4 == 1 %}
+{% if loop.index % nbProductsRow == 1 %}
 <div class="row-fluid">
 {% endif %}
+	{% if nbProductsRow == 6 %}
+	<div class="span2">
+	{% else %}
 	<div class="span3">
+	{% endif %}
 		<p class="text-center">
 			<img src="{{ resize(root~'uploads/products/'~product.image, 180, 180, 'outbound') }}" alt="" />
 		</p>
@@ -21,7 +25,7 @@
 			</p>
 		</div>
 	</div>
-{% if loop.index % 4 == 0 %}
+{% if loop.index % nbProductsRow == 0 %}
 </div>
 <hr />
 {% endif %}

@@ -13,8 +13,12 @@
 	}
 	
 	$nbProductsCart = nbProductsCart();
+	$bestProducts = getBestProducts();
+	$lastProducts = getLastProducts();
 
 	echo($template->render(array(
 		"MEDIA_PATH" => MEDIA_PATH,
-		"nbProductsCart" => $nbProductsCart
+		"nbProductsCart" => $nbProductsCart,
+		"bestProducts" => $bestProducts,
+		"lastProducts" => $lastProducts
 	)));

@@ -97,7 +97,7 @@ function getProductsByMultipleArgs($idCategory, $sort, $date, $idArtist) {
 	}
 	if($sort != null) {
 		if($sort == "best") {
-			$sql .= ' GROUP BY product.id ORDER BY total LIMIT 0,5';
+			$sql .= ' GROUP BY product.id ORDER BY total';
 		}
 		else {
 			if($sort == 'titleza') {
@@ -282,10 +282,16 @@ function isProduct($title, $idArtist, $idProduct = null) {
 }
 function getBestProducts() {
 	global $db;
-	$req = $db->prepare('SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product WHERE product.id_category = :idCategory GROUP BY product.id ORDER BY total LIMIT 0,5');
-	$req->execute(array(
-		':idCategory' => $idCategory
-	));
+	$req = $db->prepare('SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product GROUP BY product.id ORDER BY total LIMIT 0,6');
+	$req->execute();
+	$products = $req->fetchAll();
+
+	return $products;
+}
+function getLastProducts() {
+	global $db;
+	$req = $db->prepare('SELECT * FROM product ORDER BY product.date DESC LIMIT 0,6');
+	$req->execute();
 	$products = $req->fetchAll();
 
 	return $products;
