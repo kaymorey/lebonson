@@ -11,6 +11,11 @@
 	$addProduct = null;
 
 	if(isset($_GET['add']) && is_numeric($_GET['add']) && getProductById($_GET['add']) != null) {
+		if(!isInStock($_GET['add'])) {
+			$template = $tpl->loadTemplate('ajax/error-cart.html.twig');
+			echo($template->render(array()));
+			exit;
+		}
 		addToCart($_GET['add']);
 		$addProduct = getProductById($_GET['add']);
 		$template = $tpl->loadTemplate('ajax/add-cart.html.twig');

@@ -290,6 +290,19 @@ function isProduct($title, $idArtist, $idProduct = null) {
 
 	return "false";
 }
+function isInStock($idProduct) {
+	global $db;
+	$req = $db->prepare('SELECT product.in_stock FROM product WHERE product.in_stock = 1 AND product.id = :idProduct');
+	$req->execute(array(
+		':idProduct' => $idProduct
+	));
+
+	$product = $req->fetch();
+	if(empty($product)) {
+		return false;
+	}
+	return true;
+}
 function getBestProducts() {
 	global $db;
 	$req = $db->prepare('SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product GROUP BY product.id ORDER BY total LIMIT 0,6');
