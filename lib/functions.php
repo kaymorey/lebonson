@@ -79,7 +79,7 @@ function getSession($title) {
 function setFilter($filter, $value, $url, $sort, $date, $artist) {
 	switch ($filter) {
 		case 'order':
-			if($sort == NULL) {
+			if($sort == NULL || $sort != $value) {
 				$url .= '&sort='.$value;
 			}
 			if($date != NULL) {
@@ -91,9 +91,9 @@ function setFilter($filter, $value, $url, $sort, $date, $artist) {
 			break;
 		case 'date':
 			if($sort != NULL) {
-				$url .= '&sort'.$sort;
+				$url .= '&sort='.$sort;
 			}
-			if($date == NULL) {
+			if($date == NULL || $date != $value) {
 				$url .= '&date='.$value;
 			}
 			if($artist != NULL) {
@@ -105,9 +105,9 @@ function setFilter($filter, $value, $url, $sort, $date, $artist) {
 				$url .= '&sort='.$sort;
 			}
 			if($date != NULL) {
-				$url .= '&date'.$date;
+				$url .= '&date='.$date;
 			}
-			if($artist == NULL) {
+			if($artist == NULL || $artist != $value) {
 				$url .= '&art='.$value;
 			}
 			break;

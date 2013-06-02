@@ -86,6 +86,7 @@ function getProductsByMultipleArgs($idCategory, $sort, $date, $idArtist) {
 			$parameters[':to'] = $to->format('Y-m-d');
 		}
 	}
+	$sql = substr($sql, 0, -4);
 	if($sort != null) {
 		if($sort == 'best') {
 			// ...
@@ -94,14 +95,12 @@ function getProductsByMultipleArgs($idCategory, $sort, $date, $idArtist) {
 			$sort = 'title DESC';
 		}
 		elseif($sort == 'pricedesc') {
-			$sort == 'price DESC';
+			$sort = 'price DESC';
 		}
 		$sql .= ' ORDER BY '.$sort;
 	}
-	$sql = substr($sql, 0, -4);
 	$req = $db->prepare($sql);
 	$req->execute($parameters);
-	var_dump($req);
 
 	$products = $req->fetchAll();
 
