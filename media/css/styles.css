@@ -32,6 +32,18 @@ div.cart table.cart .icon-trash {
 div.cart .summary {
   width: 30%;
 }
+.product-list .caption a:hover {
+  text-decoration: none;
+}
+.product-list .caption a .lead {
+  color: #555555;
+}
+.product-content img {
+  margin: 0 20px 20px 0;
+}
+.product-content .content {
+  margin-top: 40px;
+}
 #footer {
   text-align: center;
   background-color: #F5F5F5;

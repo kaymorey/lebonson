@@ -3,12 +3,14 @@
 <div class="row-fluid">
 {% endif %}
 	{% if nbProductsRow == 6 %}
-	<div class="span2">
+	<div class="span2 product-list">
 	{% else %}
-	<div class="span3">
+	<div class="span3 product-list">
 	{% endif %}
 		<p class="text-center">
-			<img src="{{ resize(root~'uploads/products/'~product.image, 180, 180, 'outbound') }}" alt="" />
+			<a href="products.php?product={{ product.slug }}">
+				<img src="{{ resize(root~'uploads/products/'~product.image, 180, 180, 'outbound') }}" alt="" />
+			</a>
 		</p>
 		<div class="caption">
 			{% if product.in_stock == 1%}
@@ -16,10 +18,12 @@
 			{% else %}
 				<span class="label label-important">Épuisé</span>
 			{% endif %}
-			<h5>{{ product.title }}<br />
-				<small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small>
-			</h5>
-			<p class="lead">{{ product.price }}€</p>
+			<a href="products.php?product={{ product.slug }}">
+				<h5>{{ product.title }}<br />
+					<small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small>
+				</h5>
+				<p class="lead">{{ product.price }}€</p>
+			</a>
 			<p class="text-center">
 				<a href="cart.php?add={{ product.id }}" class="btn btn-block btn-primary fancy-add-cart"><i class="icon-plus-sign icon-white"></i> Ajouter au panier</a>
 			</p>

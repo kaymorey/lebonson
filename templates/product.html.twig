@@ -1,0 +1,26 @@
+{% set artist = getArtistById(product.id_artist) %}
+{% extends 'layout/base.html.twig' %}
+{% block title %}{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }} - {{ product.title }}{% endblock %}
+{% block content %}
+<div class="row-fluid product-content">
+	<img src="{{ root~'uploads/products/'~product.image }}" alt="" class="pull-left" />
+	<div class="content">
+		<h2>{{ product.title }}<br />
+			<small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small>
+		</h2>
+		{% if product.in_stock == 1%}
+			<span class="label label-success">En stock</span>
+		{% else %}
+			<span class="label label-important">Épuisé</span>
+		{% endif %}
+		<p class="lead">{{ product.price }}€</p>
+		<a href="cart.php?add={{ product.id }}" class="btn btn-primary fancy-add-cart"><i class="icon-plus-sign icon-white"></i> Ajouter au panier</a>
+	</div>
+	<div class="clearfix"></div>
+	<p><strong>Date de parution</strong> : {{ product.date | date("d/m/Y") }}</p>
+	<p><strong>Label / maison de disque</strong> : {{ product.editor }}</p>
+	<blockquote>
+		{{ product.description }}
+	</blockquote>
+</div>
+{% endblock %}

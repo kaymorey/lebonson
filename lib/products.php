@@ -18,6 +18,16 @@ function getProductById($idProduct) {
 	$product = $req->fetch();
 	return $product;
 }
+function getProductBySlug($slug) {
+	global $db;
+	$req = $db->prepare('SELECT * FROM product WHERE product.slug = :slug');
+	$req->execute(array(
+		':slug' => $slug
+	));
+
+	$product = $req->fetch();
+	return $product;
+}
 function getProductsByCategory($idCategory) {
 	global $db;
 	$req = $db->prepare('SELECT * FROM product WHERE product.id_category = :idCategory');
