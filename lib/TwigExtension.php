@@ -41,11 +41,12 @@ $tpl->addFunction($resizeImageFunction);
 
 // Session
 $getSessionFunction = new Twig_SimpleFunction('session', function($title) {
-	if(isset($_SESSION[$title])) {
-		return $_SESSION[$title];
-	}
-	else {
-		return false;
-	}
+	return getSession($title);
 });
 $tpl->addFunction($getSessionFunction);
+
+// Filtres de recherche
+$setFilterFunction = new Twig_SimpleFunction('setFilter', function($filter, $value, $url, $sort, $date, $artist) {
+	return setFilter($filter, $value, $url, $sort, $date, $artist);
+});
+$tpl->addFunction($setFilterFunction);

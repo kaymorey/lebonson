@@ -49,22 +49,59 @@ function getProductByTitleAndArtist($title, $idArtist) {
 	$product = $req->fetch();
 	return $product;
 }
-function getProductsByMultipleArgs($order = null, $idArtist = null) {
+function getProductsByMultipleArgs($idCategory, $sort, $date, $idArtist) {
 	global $db;
-	$sql = 'SELECT * FROM product';
+	$sql = 'SELECT * FROM product WHERE product.id_category = :idCategory AND';
 	$parameters = array();
+	$parameters[':idCategory'] = $idCategory;
 
 	if($idArtist != null) {
-		$sql .= ' WHERE product.id_artist = :idArtist';
+		$sql .= ' product.id_artist = :idArtist';
+		$sql.= ' AND';
 		$parameters[':idArtist'] = $idArtist;
 	}
-	if($order != null) {
-		$sql .= ' ORDER BY :order';
-		$parameters[':order'] = $order;
+	if($date != null) {
+		if($date == '3m') {
+			$from = new DateTime();
+			$from->sub(new DateInterval('P3M'));
+		}
+		elseif($date == '612m') {
+			$from = new DateTime();
+			$from->sub(new DateInterval('P12M'));
+			$to = new DateTime();
+			$to->sub(new DateInterval('P6M'));
+		}
+		elseif($date == '12m') {
+			$to = new DateTime();
+			$to->sub(new DateInterval('P12M'));
+		}
+		if(isset($from)) {
+			$sql .= ' product.date > :from';
+			$sql .= ' AND'; 
+			$parameters[':from'] = $from->format('Y-m-d');
+		}
+		if(isset($to)) {
+			$sql .= ' product.date <  :to';
+			$sql .= ' AND';
+			$parameters[':to'] = $to->format('Y-m-d');
+		}
 	}
-
+	if($sort != null) {
+		if($sort == 'best') {
+			// ...
+		}
+		if($sort == 'titleza') {
+			$sort = 'title DESC';
+		}
+		elseif($sort == 'pricedesc') {
+			$sort == 'price DESC';
+		}
+		$sql .= ' ORDER BY '.$sort;
+	}
+	$sql = substr($sql, 0, -4);
 	$req = $db->prepare($sql);
 	$req->execute($parameters);
+	var_dump($req);
 
 	$products = $req->fetchAll();
 

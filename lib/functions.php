@@ -66,5 +66,55 @@ function generateSalt() {
 
 	return $salt;
 }
+// Récupérer une variable de session (twig extension)
+function getSession($title) {
+	if(isset($_SESSION[$title])) {
+		return $_SESSION[$title];
+	}
+	else {
+		return false;
+	}
+}
+// Générer l'url pour le filtre de recherche (twig extension)
+function setFilter($filter, $value, $url, $sort, $date, $artist) {
+	switch ($filter) {
+		case 'order':
+			if($sort == NULL) {
+				$url .= '&sort='.$value;
+			}
+			if($date != NULL) {
+				$url .= '&date='.$date;
+			}
+			if($artist != NULL) {
+				$url .= '&art='.$artist;
+			}
+			break;
+		case 'date':
+			if($sort != NULL) {
+				$url .= '&sort'.$sort;
+			}
+			if($date == NULL) {
+				$url .= '&date='.$value;
+			}
+			if($artist != NULL) {
+				$url .= '&art='.$artist;
+			}
+			break;
+		case 'artist':
+			if($sort != NULL) {
+				$url .= '&sort='.$sort;
+			}
+			if($date != NULL) {
+				$url .= '&date'.$date;
+			}
+			if($artist == NULL) {
+				$url .= '&art='.$value;
+			}
+			break;
+		default:
+			break;
+	}
+	return $url;
+}
 
 

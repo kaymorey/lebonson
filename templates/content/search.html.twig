@@ -1,0 +1,30 @@
+{% set originalUrl = 'categories.php?category='~category.slug %}
+<div class="well sidebar-nav">
+	<ul class="nav nav-list">
+		<li class="nav-header">Trier par</li>
+		{% set url = setFilter("order", "best", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">Meilleures ventes</a></li>
+		{% set url = setFilter("order", "title", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">Titre : A > Z</a></li>
+		{% set url = setFilter("order", "titleza", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">Titre : Z > A</a></li>
+		{% set url = setFilter("order", "price", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">Prix : du - cher au + cher</a></li>
+		{% set url = setFilter("order", "pricedesc", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">Prix : du + cher au - cher</a></li>
+		
+		<li class="nav-header">Date de parution</li>
+		{% set url = setFilter("date", "3m", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">Nouveautés (- de 3 mois)</a></li>
+		{% set url = setFilter("date", "612m", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">6 - 12 mois</a></li>
+		{% set url = setFilter("date", "12m", originalUrl, sort, date, artist) %}
+		<li><a href="{{ url }}">+ 12 mois</a></li>
+		
+		<li class="nav-header">Principaux artistes</li>
+		{% for artist in mainArtists %}
+		{% set url = setFilter("artist", artist.id, originalUrl, sort, date, art) %}
+		<li><a href="{{ url }}">{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</a></li>
+		{% endfor %}
+	</ul>
+</div>

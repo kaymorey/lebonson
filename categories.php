@@ -4,6 +4,10 @@
 
 	session_start();
 
+	$sort = null;
+	$date = null;
+	$art = null;
+
 	if(!isset($_GET['category'])) {
 		header('Location: index.php');
 	}
@@ -14,10 +18,25 @@
 	if(!isset($_SESSION['cart'])) {
 		$_SESSION['cart'] = array();
 	}
-	
+
 	$nbProductsCart = nbProductsCart();
 	$category = getCategoryBySlug($_GET['category']);
-	$products = getProductsByCategory($category['id']);
+
+	if(isset($_GET['sort'])) {
+		$sort = $_GET['sort'];
+	}
+	if(isset($_GET['date'])) {
+		$date = $_GET['date'];
+	}
+	if(isset($_GET['art'])) {
+		$art = $_GET['art'];
+	}
+	if(empty($sort) && empty($date) && empty($art)) {
+		$products = getProductsByCategory($category['id']);
+	}
+	else {
+		$products = getProductsByMultipleArgs($category['id'], $sort, $date, $art);
+	}
 	$mainArtists = getMainArtistsByCategory($category['id']);
 
 	echo($template->render(array(
@@ -25,5 +44,8 @@
 		"nbProductsCart" => $nbProductsCart,
 		"category" => $category,
 		"products" => $products,
-		"mainArtists" => $mainArtists
+		"mainArtists" => $mainArtists,
+		"sort" => $sort,
+		"date" => $date,
+		"art" => $art
 	)));

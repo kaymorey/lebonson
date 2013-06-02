@@ -4,24 +4,7 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span3">
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					<li class="nav-header">Trier par</li>
-					<li><a href="#">Meilleures ventes</a></li>
-					<li><a href="#">Titre : A > Z</a></li>
-					<li><a href="#">Titre : Z > A</a></li>
-					<li><a href="#">Prix : du - cher au + cher</a></li>
-					<li><a href="#">Prix : du + cher au - cher</a></li>
-					<li class="nav-header">Date de parution</li>
-					<li><a href="#">Nouveautés (- de 3 mois)</a></li>
-					<li><a href="#">6 - 12 mois</a></li>
-					<li><a href="#">+ 12 mois</a></li>
-					<li class="nav-header">Principaux artistes</li>
-					{% for artist in mainArtists %}
-					<li><a href="#">{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</a></li>
-					{% endfor %}
-				</ul>
-			</div>
+			{% include 'content/search.html.twig' with {'mainArtists' : mainArtists} %}
 		</div>
 		<div class="span9">
 			<div class="row-fluid">
