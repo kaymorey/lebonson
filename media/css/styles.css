@@ -1,4 +1,13 @@
+html,
+body {
+  height: 100%;
+}
 section.main {
+  height: auto !important;
+  margin: 0 auto -60px;
+  min-height: 100%;
+}
+section.main .container {
   padding-top: 60px;
 }
 .add-cart {
@@ -45,6 +54,7 @@ div.cart .summary {
   margin-top: 40px;
 }
 #footer {
+  clear: both;
   text-align: center;
   background-color: #F5F5F5;
   height: 60px;
