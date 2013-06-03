@@ -7,6 +7,8 @@
 	$errorsRegistration = array();
 	$errorsConnexion = array();
 	$addCustomer = null;
+	$lastname = null;
+	$firstname = null;
 	$mail = null;
 	$cart = true;
 
@@ -24,7 +26,7 @@
 		include 'connexion.php';
 		$errorsConnexion = $errors;
 	}
-	else if(!isset($_POST['conditions']) || !$_POST['conditions']) {
+	if(!isset($_POST['conditions']) || !$_POST['conditions']) {
 		$cart = false;
 	}
 
@@ -34,6 +36,8 @@
 		"errorsRegistration" => $errorsRegistration,
 		"errorsConnexion" => $errorsConnexion,
 		"addCustomer" => $addCustomer,
+		"lastname" => $lastname,
+		"firstname" => $firstname,
 		"mail" => $mail,
 		"cart" => $cart
 	)));

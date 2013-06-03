@@ -28,7 +28,7 @@
 	$idCustomer = $_SESSION['customer'];
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if(!isset($_POST['lastname']) || !isset($_POST['firstname'])  || !isset($_POST['address1']) || !isset($_POST['address2']) || !isset($_POST['postcode']) || !isset($_POST['city']) || !isset($_POST['lastnameB']) || !isset($_POST['firstnameB']) || !isset($_POST['address1B']) || !isset($_POST['address2B']) || !isset($_POST['postcodeB']) || !isset($_POST['cityB'])) {
+		if(!isset($_POST['lastname']) || !isset($_POST['firstname']) || !isset($_POST['address1']) || !isset($_POST['address2']) || !isset($_POST['postcode']) || !isset($_POST['city']) || !isset($_POST['lastnameB']) || !isset($_POST['firstnameB']) || !isset($_POST['address1B']) || !isset($_POST['address2B']) || !isset($_POST['postcodeB']) || !isset($_POST['cityB'])) {
 			$errors[] = 'Formulaire non conforme.';
 		}
 		else {

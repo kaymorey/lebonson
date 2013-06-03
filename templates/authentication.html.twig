@@ -22,8 +22,10 @@
 				<br />
 				<input type="hidden" name="action" value="connexion" />
 				<!-- Savoir si l'utilisateur est dans le tunnel d'achat -->
-				<input type="hidden" name="cart" {% if cart %}value="true"{% else %}value="false"{% endif %} />
+				<input type="hidden" name="cart" {% if cart == true %}value="true"{% else %}value="false"{% endif %} />
 				<button type="submit" class="btn btn-primary">Connexion</button>
+				<br />
+				<small>Tous les champs sont obligatoires.</small>
 			</form>
 		</div>
 		<div class="span6">
@@ -39,6 +41,28 @@
 			</div>
 			{% endif %}
 			<form method="post" action="authentication.php">
+				<label>Civilité</label>
+				<label class="radio inline" for="civility1">
+				<input type="radio" name="civility" id="civility1" value="Mme" {% if address and address.civility == "Mme" %} checked {% endif %}/>
+					Mme
+				</label>
+				<label class="radio inline" for="civility2">
+				<input type="radio" name="civility" id="civility2" value="Mlle" {% if address and address.civility == "Mlle" %} checked {% endif %}/>
+					Mlle
+				</label>
+				<label class="radio inline" for="civility3">
+				<input type="radio" name="civility" id="civility3" value="M." {% if address and address.civility == "M." %} checked {% endif %}/>
+					M.
+				</label>
+				<br />
+				<br />
+
+				<label for="lastname">Nom</label>
+				<input type="text" id="lastname" name="lastname" {% if lastname %}value="{{ lastname }}" {% endif %}/>
+
+				<label for="firstname">Prénom</label>
+				<input type="text" id="firstname" name="firstname" {% if firstname %}value="{{ firstname }}" {% endif %}/>
+
 				<label for="mail">Email</label>
 				<input type="text" id="mail" name="mail" {% if mail %}value="{{ mail }}" {% endif %}/>
 
@@ -50,6 +74,8 @@
 				<br />
 				<input type="hidden" name="action" value="registration" />
 				<button type="submit" class="btn btn-primary">Je m'inscris</button>
+				<br />
+				<small>Tous les champs sont obligatoires.</small>
 			</form>
 		</div>
 	</div>

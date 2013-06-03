@@ -41,6 +41,8 @@
 		if(empty($errors)) {
 			$_SESSION['customer'] = $customer;
 			if($_POST['cart'] == "true") {
+				var_dump($_POST['cart']);
+				exit;
 				header('Location: delivery.php');
 			}
 			else {

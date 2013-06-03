@@ -1,8 +1,11 @@
 <?php
-function addCustomer($mail, $passwd, $key) {
+function addCustomer($civility, $lastname, $firstname, $mail, $passwd, $key) {
 	global $db;
-	$req = $db->prepare('INSERT INTO customer(id, email, passwd, firstname, lastname, active, activation_key) VALUES("", :mail, :passwd, "", "", 0, :key)');
+	$req = $db->prepare('INSERT INTO customer(id, email, passwd, civility, firstname, lastname, active, activation_key) VALUES("", :mail, :passwd, :civility, :firstname, :lastname, 0, :key)');
 	$req->execute(array(
+		':civility' => $civility,
+		':firstname' => $firstname,
+		':lastname' => $lastname,
 		':mail' => $mail,
 		':passwd' => $passwd,
 		':key' => $key
