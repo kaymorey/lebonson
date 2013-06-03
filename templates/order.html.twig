@@ -4,7 +4,7 @@
 <div class="container-fluid">
 	<h3>Mon compte</h3>
 	<ul class="breadcrumb">
-		<li><a href="account.php?customer={{ customer }}">Mon compte</a> <span class="divider">/</span></li>
+		<li><a href="account.php">Mon compte</a> <span class="divider">/</span></li>
 		<li class="active">Commande du {{ order.date | date('d/m/Y') }}</li>
 	</ul>
 	{% set details = getOrderDetails(order.id) %}

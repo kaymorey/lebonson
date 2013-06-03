@@ -17,6 +17,24 @@ function addCustomer($civility, $lastname, $firstname, $mail, $passwd, $key) {
 	}
 	return true;
 }
+function editCustomer($idCustomer, $civility, $lastname, $firstname, $mail, $passwd) {
+	global $db;
+	$req = $db->prepare('UPDATE customer SET civility = :civility, lastname = :lastname, firstname = :firstname, email = :mail, passwd = :passwd WHERE customer.id = :idCustomer');
+	$req->execute(array(
+		':idCustomer' => $idCustomer,
+		':civility' => $civility,
+		':firstname' => $firstname,
+		':lastname' => $lastname,
+		':mail' => $mail,
+		':passwd' => $passwd
+	));
+
+	// Erreur lors de l'exécution de la requête
+	if(!$req) {
+		return false;
+	}
+	return true;
+}
 function isCustomer($idCustomer) {
 	global $db;
 	$req = $db->prepare('SELECT customer.id FROM customer WHERE customer.id = :idCustomer');
@@ -99,4 +117,14 @@ function isActiveCustomer($idCustomer) {
 		return true;
 	}
 
+}
+function getCustomerById($idCustomer) {
+	global $db;
+	$req = $db->prepare('SELECT customer.* FROM customer WHERE customer.id = :idCustomer');
+	$req->execute(array(
+		':idCustomer' => $idCustomer 
+	));
+
+	$customer = $req->fetch();
+	return $customer;
 }

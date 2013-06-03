@@ -8,10 +8,14 @@
 		header('Location: index.php');
 	}
 
+	$customer = getCustomerById($_SESSION['customer']);
 	$orders = getOrdersByCustomer($_SESSION['customer']);
+	$delivery = getAddressCustomer($customer['id']);
 
 	echo($template->render(array(
 		"MEDIA_PATH" => MEDIA_PATH,
 		"categoryMenu" => "account",
-		"orders" => $orders
+		"customer" => $customer,
+		"orders" => $orders,
+		"delivery" => $delivery
 	)));

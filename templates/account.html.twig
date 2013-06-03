@@ -5,7 +5,17 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<h3>Mon compte</h3>
+			<a href="perso-informations.php" class="btn btn-primary">Modifier mes informations</a>
+			<br /><br />
+			<p class="lead">
+				{{ customer.firstname }} {{ customer.lastname }}<br />
+				<small>{{ customer.email }}</small>
+			</p>
+			<hr />
 			<h5>Mes commandes</h5>
+			{% if orders is empty %}
+				<p>Aucune commande passée pour l'instant.</p>
+			{% else %}
 			{% for order in orders %}
 				{% set details = getOrderDetails(order.id) %}
 				<p>
@@ -36,6 +46,21 @@
 					</tbody>
 				</table>
 			{% endfor %}
+			{% endif %}
+			<hr />
+			<h5>Mon addresse de livraison</h5>
+			{% if delivery is empty %}
+				<p>Aucune adresse par défaut spécifiée.</p>
+			{% else %}
+			<address>
+				<strong>{{ delivery.firstname }} {{ delivery.lastname }}</strong><br />
+				{{ delivery.address1 }}<br />
+				{% if delivery.address2 is not empty %}
+				{{ delivery.address2 }}<br />
+				{% endif %}
+				{{ delivery.postcode }} {{ delivery.city }}<br />
+			</address>
+			{% endif %}
 		</div>
 	</div>
 </div>

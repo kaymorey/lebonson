@@ -32,6 +32,10 @@
 		$passwdConfirm = trim($passwdConfirm);
 
 		// Vérifier que les champs ne sont pas vides
+		if(isset($update) && empty($passwd)) {
+			$passwd = $customer['passwd'];
+			$passwdConfirm = $passwd;
+		}
 		if(empty($lastname) || empty($firstname) || empty($mail) || empty($passwd) || empty($passwdConfirm)) {
 			$errors[] = 'Veuillez remplir tous les champs.';
 		}
@@ -58,15 +62,27 @@
 			if($passwd != $passwdConfirm) {
 				$errors[] = 'Les mots de passe doivent être identiques.';
 			}
-			if(isCustomerMail($mail)) {
+			if(isCustomerMail($mail) && !isset($update)) {
 				$errors[] = 'Un utilisateur est déjà enregistré avec cette adresse email.';
 			}
 		}
 		if(empty($errors)) {
-			$key = uniqid();
-			$salt = generateSalt();
-			$passwd = crypt($passwd, $salt);
-			$addCustomer = addCustomer($civility, $lastname, $firstname, $mail, $passwd, $key);
-			sendRegistrationMail($mail, $key);
+			if(isset($update)) {
+				if($passwd != $customer['passwd']) {
+					$salt = generateSalt();
+					$passwd = crypt($passwd, $salt);
+				}
+				$editCustomer = editCustomer($customer['id'], $civility, $lastname, $firstname, $mail, $passwd);
+				if(!$editCustomer) {
+					$errors[] = 'Erreur lors de la modification du compte.';
+				}
+			}
+			else {
+				$key = uniqid();
+				$salt = generateSalt();
+				$passwd = crypt($passwd, $salt);
+				$addCustomer = addCustomer($civility, $lastname, $firstname, $mail, $passwd, $key);
+				sendRegistrationMail($mail, $key);
+			}
 		}
 	}

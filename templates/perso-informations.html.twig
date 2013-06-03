@@ -1,0 +1,106 @@
+{% extends 'layout/base.html.twig' %}
+{% block title %}Mon compte - Mes informations{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row-fluid">
+			<h3>Mon compte</h3>
+			<ul class="breadcrumb">
+				<li><a href="account.php">Mon compte</a> <span class="divider">/</span></li>
+				<li class="active">Mes informations personnelles</li>
+			</ul>
+			<div class="row-fluid">
+				<div class="span6">
+					<h5>Informations générales</h5>
+					{% if errorsInformations %}
+						{% include 'content/errors.html.twig' with {'errors' : errorsInformations} %}
+					{% elseif editCustomer %}
+					<div class="alert alert-success">
+						Votre compte a bien été modifié.
+					</div>
+					{% endif %}
+					<form method="post" action="perso-informations.php">
+						<label>Civilité *</label>
+						<label class="radio inline" for="civility1">
+						<input type="radio" name="civility" id="civility1" value="Mme" {% if customer.civility == "Mme" %} checked {% endif %}/>
+							Mme
+						</label>
+						<label class="radio inline" for="civility2">
+						<input type="radio" name="civility" id="civility2" value="Mlle" {% if customer.civility == "Mlle" %} checked {% endif %}/>
+							Mlle
+						</label>
+						<label class="radio inline" for="civility3">
+						<input type="radio" name="civility" id="civility3" value="M." {% if customer.civility == "M." %} checked {% endif %}/>
+							M.
+						</label>
+						<br />
+						<br />
+
+						<label for="lastname">Nom *</label>
+						<input type="text" id="lastname" name="lastname" value="{{ customer.lastname }}" />
+
+						<label for="firstname">Prénom *</label>
+						<input type="text" id="firstname" name="firstname" value="{{ customer.firstname }}" />
+
+						<label for="mail">Email *</label>
+						<input type="text" id="mail" name="mail" value="{{ customer.email }}" />
+
+						<label for="password">Nouveau mot de passe</label>
+						<input type="password" id="password" name="passwd" />
+						
+						<label for="password-confirm">Confirmez le mot de passe</label>
+						<input type="password" id="password-confirm" name="passwd-confirm" />
+						<br />
+						<input type="hidden" name="action" value="perso_infos" />
+						<button type="submit" class="btn btn-primary">Valider</button>
+						<br />
+						<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+					</form>
+				</div>
+				<div class="span6">
+					<h5>Adresse de livraison</h5>
+					<form method="post" action="perso-informations.php">
+						<label>Civilité *</label>
+						<label class="radio inline" for="civility1">
+						<input type="radio" name="civility" id="civility1" value="Mme" {% if address.civility == "Mme" %} checked {% endif %}/>
+							Mme
+						</label>
+						<label class="radio inline" for="civility2">
+						<input type="radio" name="civility" id="civility2" value="Mlle" {% if address.civility == "Mlle" %} checked {% endif %}/>
+							Mlle
+						</label>
+						<label class="radio inline" for="civility3">
+						<input type="radio" name="civility" id="civility3" value="M." {% if address.civility == "M." %} checked {% endif %}/>
+							M.
+						</label>
+						<br />
+						<br />
+
+						<label for="lastname">Nom *</label>
+						<input type="text" id="lastname" name="lastname" value="{{ address.lastname }}" />
+
+						<label for="firstname">Prénom *</label>
+						<input type="text" id="firstname" name="firstname" value="{{ address.firstname }}" />
+
+						<label for="address1">Adresse *</label>
+						<input type="text" id="address1" name="address1" value="{{ address.address1 }}" />
+
+						<label for="address2">Complément d'adresse</label>
+						<input type="text" id="address2" name="address2" value="{{ address.address2 }}" />
+
+						<label for="postcode">Code postal *</label>
+						<input type="text" id="postcode" name="postcode" value="{{ address.postcode }}" />
+
+						<label for="city">Ville *</label>
+						<input type="text" id="city" name="city" value="{{ address.city }}" />
+						<input type="hidden" name="action" value="address" />
+						<br />
+						<button type="submit" class="btn btn-primary">Valider</button>
+						<br />
+						<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

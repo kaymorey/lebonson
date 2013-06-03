@@ -39,6 +39,12 @@ $getOrderDetailsFunction = new Twig_SimpleFunction('getOrderDetails', function (
 });
 $tpl->addFunction($getOrderDetailsFunction);
 
+// Adresses
+$getAddressCustomer = new Twig_SimpleFunction('getAddressCustomer', function ($idCustomer) {
+	return getAddressCustomer($idCustomer);
+});
+$tpl->addFunction($getAddressCustomer);
+
 
 // Imagine
 $resizeImageFunction = new Twig_SimpleFunction('resize', function($image, $width, $height, $mode) {
