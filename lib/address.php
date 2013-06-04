@@ -1,7 +1,7 @@
 <?php
 function getAddressCustomer($idCustomer) {
 	global $db;
-	$req = $db->prepare('SELECT address.* FROM address WHERE address.id_customer = :idCustomer');
+	$req = $db->prepare('SELECT address.* FROM address WHERE address.id_customer = :idCustomer AND address.default = 1');
 	$req->execute(array(
 		':idCustomer' => $idCustomer
 	));
