@@ -4,8 +4,6 @@
 
 	session_start();
 
-	$errors = array();
-
 	if(!isset($_SESSION['customer'])) {
 		header('Location: index.php');
 	}
