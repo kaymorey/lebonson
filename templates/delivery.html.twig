@@ -9,14 +9,7 @@
 			<fieldset>
 				<legend>Adresse de livraison</legend>
 				{% if errorsDelivery %}
-				<div class="alert alert-error">
-					{% for error in errorsDelivery %}
-						{{ error }}
-						{% if loop.last == false %}
-						<br />
-						{% endif %}
-					{% endfor %}
-				</div>
+					{% include 'content/errors.html.twig' with {'errors' : errorsDelivery} %}
 				{% endif %}
 				<label>Civilité *</label>
 				<label class="radio inline" for="civility1">
@@ -64,14 +57,7 @@
 			<fieldset class="billing">
 				<legend>Adresse de facturation</legend>
 				{% if errorsBilling %}
-				<div class="alert alert-error">
-					{% for error in errorsBilling %}
-						{{ error }}
-						{% if loop.last == false %}
-						<br />
-						{% endif %}
-					{% endfor %}
-				</div>
+					{% include 'content/errors.html.twig' with {'errors' : errorsBilling} %}
 				{% endif %}
 				<label>Civilité *</label>
 				<label class="radio inline" for="civility1B">

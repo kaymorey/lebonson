@@ -7,14 +7,7 @@
 		<a class="btn btn-success" href="index.php"><i class="icon-circle-arrow-left icon-white"></i> Retour aux catégories</a>
 		<hr />
 		{% if errors %}
-		<div class="alert alert-error">
-			{% for error in errors %}
-				{{ error }}
-				{% if loop.last == false %}
-				<br />
-				{% endif %}
-			{% endfor %}
-		</div>
+			{% include 'content/errors.html.twig' with {'errors' : errors} %}
 		{% endif %}
 		<form action="edit.php?category={{ category.id }}" method="post">
 			<label for="title">Nom *</label>
