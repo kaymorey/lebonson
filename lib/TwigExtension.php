@@ -22,28 +22,34 @@ $getNbProductsArtistFunction = new Twig_SimpleFunction('getNbProductsArtist', fu
 });
 $tpl->addFunction($getNbProductsArtistFunction);
 
-$getArtistByIdFunction = new Twig_SimpleFunction('getArtistById', function ($idArtist) {
+$getArtistByIdFunction = new Twig_SimpleFunction('getArtistById', function($idArtist) {
 	return getArtistById($idArtist);
 });
 $tpl->addFunction($getArtistByIdFunction);
 
 // Produits
-$getProductByIdFunction = new Twig_SimpleFunction('getProductById', function ($idProduct) {
+$getProductByIdFunction = new Twig_SimpleFunction('getProductById', function($idProduct) {
 	return getProductById($idProduct);
 });
 $tpl->addFunction($getProductByIdFunction);
 
 // Commandes
-$getOrderDetailsFunction = new Twig_SimpleFunction('getOrderDetails', function ($idOrder) {
+$getOrderDetailsFunction = new Twig_SimpleFunction('getOrderDetails', function($idOrder) {
 	return getOrderDetails($idOrder);
 });
 $tpl->addFunction($getOrderDetailsFunction);
 
 // Adresses
-$getAddressCustomer = new Twig_SimpleFunction('getAddressCustomer', function ($idCustomer) {
+$getAddressCustomer = new Twig_SimpleFunction('getAddressCustomer', function($idCustomer) {
 	return getAddressCustomer($idCustomer);
 });
 $tpl->addFunction($getAddressCustomer);
+
+// Clients
+$getCustomerByIdFunction = new Twig_SimpleFunction('getCustomerById', function($idCustomer) {
+	return getCustomerById($idCustomer);
+});
+$tpl->addFunction($getCustomerByIdFunction);
 
 
 // Imagine

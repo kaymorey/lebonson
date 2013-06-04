@@ -1,4 +1,12 @@
 <?php
+function getAllOrders() {
+	global $db;
+	$req = $db->prepare('SELECT * FROM orders');
+	$req->execute();
+
+	$orders = $req->fetchAll();
+	return $orders;
+}
 function addOrder($idCustomer, $delivery, $billing) {
 	$date = new DateTime();
 	$amount = getAmountCart();
