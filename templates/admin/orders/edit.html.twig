@@ -1,0 +1,40 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Modifier - Commandes{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Commandes <small>MODIFIER UNE COMMANDE</small></h3>
+		<a class="btn btn-success" href="index.php"><i class="icon-circle-arrow-left icon-white"></i> Retour aux commandes</a>
+		<hr />
+		{% if errors %}
+			{% include '../../templates/content/errors.html.twig' %}
+		<div class="alert alert-error">
+			{% for error in errors %}
+				{{ error }}
+				{% if loop.last == false %}
+				<br />
+				{% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
+		<form action="edit.php?order={{ order.id }}" method="post">
+			<label for="status">État de la commande *</label>
+			<select id="status" name="status">
+				<option value="En préparation"{% if order.status == "En préparation" %} selected{% endif %}>
+					En préparation
+				</option>
+				<option value="Envoyée"{% if order.status == "Envoyée" %} selected{% endif %}>
+					Envoyée
+				</option>
+				<option value="Annulée"{% if order.status == "Annulée" %} selected{% endif %}>
+					Annulée
+				</option>
+			</select>
+			<br />
+			<input type="submit" class="btn btn-primary" value="Valider" />
+			<br />
+			<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+		</form>
+	</div>
+</div>
+{% endblock %}

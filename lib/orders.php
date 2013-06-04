@@ -7,6 +7,19 @@ function getAllOrders() {
 	$orders = $req->fetchAll();
 	return $orders;
 }
+function isOrder($idOrder) {
+	global $db;
+	$req = $db->prepare('SELECT orders.id FROM orders WHERE orders.id = :idOrder');
+	$req->execute(array(
+		':idOrder' => $idOrder
+	));
+	$order = $req->fetch();
+
+	if(empty($order)) {
+		return false;
+	}
+	return true;
+}
 function addOrder($idCustomer, $delivery, $billing) {
 	$date = new DateTime();
 	$amount = getAmountCart();
@@ -32,6 +45,19 @@ function addOrder($idCustomer, $delivery, $billing) {
 			':idOrder' => $order
 		));
 	}
+	if(!$req) {
+		return false;
+	}
+	return true;
+}
+function editOrder($idOrder, $status) {
+	global $db;
+	$req = $db->prepare('UPDATE orders SET status = :status WHERE orders.id = :idOrder');
+	$req->execute(array(
+		':status' => $status,
+		':idOrder' => $idOrder 
+	));
+
 	if(!$req) {
 		return false;
 	}
