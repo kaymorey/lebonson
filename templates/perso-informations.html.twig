@@ -58,6 +58,13 @@
 				</div>
 				<div class="span6">
 					<h5>Adresse de livraison</h5>
+					{% if errorsAddress %}
+						{% include 'content/errors.html.twig' with {'errors' : errorsAddress} %}
+					{% elseif editAddress %}
+					<div class="alert alert-success">
+						L'adresse par défaut a été correctment modifiée.
+					</div>
+					{% endif %}
 					<form method="post" action="perso-informations.php">
 						<label>Civilité *</label>
 						<label class="radio inline" for="civility1">
@@ -76,22 +83,22 @@
 						<br />
 
 						<label for="lastname">Nom *</label>
-						<input type="text" id="lastname" name="lastname" value="{{ address.lastname }}" />
+						<input type="text" id="lastname" name="lastname" value="{% if lastname %}{{ lastname }}{% elseif address %}{{ address.lastname }}{% endif %}" />
 
 						<label for="firstname">Prénom *</label>
-						<input type="text" id="firstname" name="firstname" value="{{ address.firstname }}" />
+						<input type="text" id="firstname" name="firstname" value="{% if firstname %}{{ firstname }}{% elseif address %}{{ address.firstname }}{% endif %}" />
 
 						<label for="address1">Adresse *</label>
-						<input type="text" id="address1" name="address1" value="{{ address.address1 }}" />
+						<input type="text" id="address1" name="address1" value="{% if address1 %}{{ address1 }}{% elseif address %}{{ address.address1 }}{% endif %}" />
 
 						<label for="address2">Complément d'adresse</label>
-						<input type="text" id="address2" name="address2" value="{{ address.address2 }}" />
+						<input type="text" id="address2" name="address2" value="{% if address2 %}{{ address2 }}{% elseif address %}{{ address.address2 }}{% endif %}" />
 
 						<label for="postcode">Code postal *</label>
-						<input type="text" id="postcode" name="postcode" value="{{ address.postcode }}" />
+						<input type="text" id="postcode" name="postcode" value="{% if postcode %}{{ postcode }}{% elseif address %}{{ address.postcode }}{% endif %}" />
 
 						<label for="city">Ville *</label>
-						<input type="text" id="city" name="city" value="{{ address.city }}" />
+						<input type="text" id="city" name="city" value="{% if city %}{{ city }}{% elseif address %}{{ address.city }}{% endif %}" />
 						<input type="hidden" name="action" value="address" />
 						<br />
 						<button type="submit" class="btn btn-primary">Valider</button>

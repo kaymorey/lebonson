@@ -10,6 +10,13 @@
 	$address = getAddressCustomer($customer['id']);
 
 	$editCustomer = null;
+	$editAddress = null;
+	$lastname = null;
+	$firstname = null;
+	$address1 = null;
+	$address2 = null;
+	$postcode = null;
+	$city = null;
 
 	if(!isset($_SESSION['customer'])) {
 		header('Location: index.php');
@@ -73,21 +80,28 @@
 		}
 		if(empty($errorsAddress)) {
 			// ---- Adresse de livraison ----
+			$defaultAddress = $address['id'];
+			// Mettre l'adresse par défaut à 0 (ne pas la supprimer car elle a )
+			if(!empty($defaultAddress)) {
+				setDefaultAddress($defaultAddress, 0);
+			}
 			// Si l'adresse est déjà en base
-			$isAddress = isAddress($idCustomer, $civility, $firstname, $lastname, $address1, $address2, $postcode, $city, 'delivery');
+			$isAddress = isAddress($customer['id'], $civility, $firstname, $lastname, $address1, $address2, $postcode, $city, 'delivery');
 			// Modifier son champ défaut à 1
 			if($isAddress != false) {
-				$addressDelivery = $isAddress;
+				echo('pap');
+				setDefaultAddress($isAddress, 1);
 			}
+			// Sinon l'ajouter en base
 			else {
-				// Ajouter l'adresse en base
-				$addAddress = addAddress($idCustomer, $civility, $firstname, $lastname, $address1, $address2, $postcode, $city, 1, 'delivery');
-				// Mettre l'adresse par défaut à 0
-				$defaultAddress = getAddressById($address['id']);
-				setDefaultAddress($address['id'] ,0);
+				$addAddress = addAddress($customer['id'], $civility, $firstname, $lastname, $address1, $address2, $postcode, $city, 1, 'delivery');
 				if(!$addAddress) {
 					$errorsAddress[] = 'Erreur lors de l\'exécution de la requête';
 				}
+			}
+			if(empty($errorsAddress)) {
+				$editAddress = true;
+				$address = getAddressCustomer($customer['id']);
 			}
 		}
 	}
@@ -98,5 +112,12 @@
 		"address" => $address,
 		"errorsInformations" => $errorsInformations,
 		"errorsAddress" => $errorsAddress,
-		"editCustomer" => $editCustomer
+		"editCustomer" => $editCustomer,
+		"editAddress" => $editAddress,
+		"lastname" => $lastname,
+		"firstname" => $firstname,
+		"address1" => $address1,
+		"address2" => $address2,
+		"postcode" => $postcode,
+		"city" => $city
 	)));

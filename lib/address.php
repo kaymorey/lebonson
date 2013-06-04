@@ -1,7 +1,7 @@
 <?php
 function getAddressCustomer($idCustomer) {
 	global $db;
-	$req = $db->prepare('SELECT address.* FROM address WHERE address.id_customer = :idCustomer AND address.default = 1');
+	$req = $db->prepare('SELECT address.* FROM address WHERE address.id_customer = :idCustomer AND address.defaultAddress = 1');
 	$req->execute(array(
 		':idCustomer' => $idCustomer
 	));
@@ -75,4 +75,12 @@ function getAddressById($idAddress) {
 
 	$address = $req->fetch();
 	return $address;
+}
+function setDefaultAddress($idAddress, $default) {
+	global $db;
+	$req = $db->prepare('UPDATE address SET defaultAddress = :default WHERE address.id = :idAddress');
+	$req->execute(array(
+		':default' => $default,
+		':idAddress' => $idAddress
+	));
 }
