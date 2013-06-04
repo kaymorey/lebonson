@@ -37,6 +37,47 @@ $(document).ready(function() {
 		format : 'dd/mm/yyyy',
 		viewMode : 'years'
 	});
+	// Tri tableaux
+	$('.tablesorter').tablesorter();
+	$('table.artists').tablesorter({
+		headers: {
+			4: {
+				sorter: false
+			}
+		}
+	});
+	$('table.categories').tablesorter({
+		headers: {
+			2: {
+				sorter: false
+			}
+		}
+	});
+	$('table.orders').tablesorter({
+		headers: {
+			5: {
+				sorter: false
+			}
+		}
+	});
+	$('table.customers').tablesorter({
+		headers: {
+			3: {
+				sorter: false
+			}
+		}
+	});
+	$('table.products').tablesorter({
+		headers: {
+			0: {
+				sorter: false
+			},
+			5: {
+				sorter: false
+			}
+		}
+	});
+
 	// ---- PANIER ----
 	// Ajouter au panier
 	$('.fancy-add-cart').click(function() {
