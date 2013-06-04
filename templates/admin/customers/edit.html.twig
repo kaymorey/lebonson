@@ -1,0 +1,102 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Modifier - Clients{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Clients <small>MODIFIER UN CLIENT</small></h3>
+		<a class="btn btn-success" href="index.php"><i class="icon-circle-arrow-left icon-white"></i> Retour aux clients</a>
+		<hr />
+		<div class="row-fluid">
+			<div class="span6">
+				<h5>Informations générales</h5>
+				{% if errorsInformations %}
+					{% include 'content/errors.html.twig' with {'errors' : errorsInformations} %}
+				{% endif %}
+				<form method="post" action="edit.php?customer={{ customer.id }}">
+					<label>Civilité *</label>
+					<label class="radio inline" for="civility1">
+					<input type="radio" name="civility" id="civility1" value="Mme" {% if customer.civility == "Mme" %} checked {% endif %}/>
+						Mme
+					</label>
+					<label class="radio inline" for="civility2">
+					<input type="radio" name="civility" id="civility2" value="Mlle" {% if customer.civility == "Mlle" %} checked {% endif %}/>
+						Mlle
+					</label>
+					<label class="radio inline" for="civility3">
+					<input type="radio" name="civility" id="civility3" value="M." {% if customer.civility == "M." %} checked {% endif %}/>
+						M.
+					</label>
+					<br />
+					<br />
+
+					<label for="lastname">Nom *</label>
+					<input type="text" id="lastname" name="lastname" value="{{ customer.lastname }}" />
+
+					<label for="firstname">Prénom *</label>
+					<input type="text" id="firstname" name="firstname" value="{{ customer.firstname }}" />
+
+					<label for="mail">Email *</label>
+					<input type="text" id="mail" name="mail" value="{{ customer.email }}" />
+
+					<label for="password">Nouveau mot de passe</label>
+					<input type="password" id="password" name="passwd" />
+					
+					<label for="password-confirm">Confirmez le mot de passe</label>
+					<input type="password" id="password-confirm" name="passwd-confirm" />
+					<br />
+					<input type="hidden" name="action" value="perso_infos" />
+					<button type="submit" class="btn btn-primary">Valider</button>
+					<br />
+					<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+				</form>
+			</div>
+			<div class="span6">
+				<h5>Adresse de livraison</h5>
+				{% if errorsAddress %}
+					{% include 'content/errors.html.twig' with {'errors' : errorsAddress} %}
+				{% endif %}
+				<form method="post" action="edit.php?customer={{ customer.id }}">
+					<label>Civilité *</label>
+					<label class="radio inline" for="civility1">
+					<input type="radio" name="civility" id="civility1" value="Mme" {% if address.civility == "Mme" %} checked {% endif %}/>
+						Mme
+					</label>
+					<label class="radio inline" for="civility2">
+					<input type="radio" name="civility" id="civility2" value="Mlle" {% if address.civility == "Mlle" %} checked {% endif %}/>
+						Mlle
+					</label>
+					<label class="radio inline" for="civility3">
+					<input type="radio" name="civility" id="civility3" value="M." {% if address.civility == "M." %} checked {% endif %}/>
+						M.
+					</label>
+					<br />
+					<br />
+
+					<label for="lastname">Nom *</label>
+					<input type="text" id="lastname" name="lastname" value="{% if lastname %}{{ lastname }}{% elseif address %}{{ address.lastname }}{% endif %}" />
+
+					<label for="firstname">Prénom *</label>
+					<input type="text" id="firstname" name="firstname" value="{% if firstname %}{{ firstname }}{% elseif address %}{{ address.firstname }}{% endif %}" />
+
+					<label for="address1">Adresse *</label>
+					<input type="text" id="address1" name="address1" value="{% if address1 %}{{ address1 }}{% elseif address %}{{ address.address1 }}{% endif %}" />
+
+					<label for="address2">Complément d'adresse</label>
+					<input type="text" id="address2" name="address2" value="{% if address2 %}{{ address2 }}{% elseif address %}{{ address.address2 }}{% endif %}" />
+
+					<label for="postcode">Code postal *</label>
+					<input type="text" id="postcode" name="postcode" value="{% if postcode %}{{ postcode }}{% elseif address %}{{ address.postcode }}{% endif %}" />
+
+					<label for="city">Ville *</label>
+					<input type="text" id="city" name="city" value="{% if city %}{{ city }}{% elseif address %}{{ address.city }}{% endif %}" />
+					<input type="hidden" name="action" value="address" />
+					<br />
+					<button type="submit" class="btn btn-primary">Valider</button>
+					<br />
+					<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

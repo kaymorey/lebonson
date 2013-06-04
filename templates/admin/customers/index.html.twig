@@ -1,0 +1,52 @@
+{% extends "layout/admin.html.twig" %}
+{% block title %}Clients{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h3>Clients <small>LISTE DES CLIENTS</small></h3>
+		<hr />
+		{% if editCustomer is not null %}
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert" type="button">x</button>
+			Le client <em>{{ editCustomer.firstname }} {{ editCustomer.lastname }}</em> a bien été modifié.
+		</div>
+		{% endif %}
+		{% if customers is not empty %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Mail</th>
+					<th>Adresse de livraison par défaut</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for customer in customers %}
+				{% set delivery = getAddressCustomer(customer.id) %}
+				<tr>
+					<td>{{ customer.firstname }} {{ customer.lastname }}</td>
+					<td>{{ customer.email }}</td>
+					<td>
+						{{ delivery.firstname }} {{ delivery.lastname }}<br />
+						{{ delivery.address1 }}<br />
+						{% if delivery.address2 is not empty %}
+						{{ delivery.address2 }}<br />
+						{% endif %}
+						{{ delivery.postcode }} {{ delivery.city }}
+					</td>
+					<td>
+						<p>
+							<a class="btn btn-info" href="edit.php?customer={{ customer.id }}"><i class="icon-pencil icon-white"></i> Modifier</a>
+						</p>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>Aucun client pour l'instant.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

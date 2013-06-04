@@ -1,4 +1,12 @@
 <?php
+function getAllCustomers() {
+	global $db;
+	$req = $db->prepare('SELECT * FROM customer');
+	$req->execute();
+
+	$customers = $req->fetchAll();
+	return $customers;
+}
 function addCustomer($civility, $lastname, $firstname, $mail, $passwd, $key) {
 	global $db;
 	$req = $db->prepare('INSERT INTO customer(id, email, passwd, civility, firstname, lastname, active, activation_key) VALUES("", :mail, :passwd, :civility, :firstname, :lastname, 0, :key)');
