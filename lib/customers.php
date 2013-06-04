@@ -136,3 +136,19 @@ function getCustomerById($idCustomer) {
 	$customer = $req->fetch();
 	return $customer;
 }
+function getNbCustomers() {
+	global $db;
+	$req = $db->prepare('SELECT count(customer.id) as nbCustomers FROM customer');
+	$req->execute();
+
+	$result = $req->fetch();
+	return $result['nbCustomers'];
+}
+function getBestCustomers() {
+	global $db;
+	$req = $db->prepare('SELECT customer.lastname, customer.firstname, count(orders.id_customer) as total FROM orders INNER JOIN customer ON customer.id = orders.id_customer GROUP BY customer.id ORDER BY total DESC LIMIT 0,6');
+	$req->execute();
+
+	$topCustomers = $req->fetchAll();
+	return $topCustomers;
+}

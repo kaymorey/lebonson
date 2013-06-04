@@ -3,8 +3,69 @@
 {% block content %}
 <div class="row">
 	<div class="span12">
-		<h1>Hello Katia !</h1>
-		<h2>Bienvenue sur ton backoffice !</h2>
+		<h3>Tableau de bord</h3>
+		<hr />
+		<div class="row-fluid">
+			<div class="span6">
+				<h4>Statistiques sur les commandes</h4>
+				<div class="well well-small">
+					<h5>Nombre total de commandes</h5>
+					<p>{{ nbOrders }} commande{% if nbOrders > 1 %}s{% endif %}</p>
+					<h5>Montant du panier moyen</h5>
+					<p>{{ averageAmount }}€</p>
+				</div>
+			</div>
+			<div class="span6">
+				<h4>Statistiques sur les clients</h4>
+				<div class="well well-small">
+					<h5>Nombre total de clients</h5>
+					<p>{{ nbCustomers }} client{% if nbCustomers > 1 %}s{% endif %}</p>
+					<h5>Nombre moyen de commandes par client</h5>
+					<p>{{ averageOrders }} commande{% if averageOrders > 1 %}s{% endif %} / client</p>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4>Top produits</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Produit</th>
+							<th>Nombre de commandes</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for product in bestProducts %}
+						{% set artist = getArtistById(product.id_artist) %}
+						<tr>
+							<td><img src="{{ resize(root~'uploads/products/'~product.image, 50, 50, 'outbound') }}" alt="" /> {{ product.title }} - <small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small></td>
+							<td>{{ product.total }} commande{% if product.total > 1 %}s{% endif %}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="span6">
+				<h4>Top clients</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Client</th>
+							<th>Nombre de commandes</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for customer in bestCustomers %}
+						<tr>
+							<td>{{ customer.firstname }} {{ customer.lastname }}</td>
+							<td>{{ customer.total }} commande{% if customer.total > 1 %}s{% endif %}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}

@@ -101,3 +101,19 @@ function getOrderById($idOrder) {
 	$order = $req->fetch();
 	return $order;
 }
+function getNbOrders() {
+	global $db;
+	$req = $db->prepare('SELECT count(orders.id) as nbOrders FROM orders');
+	$req->execute();
+
+	$result = $req->fetch();
+	return $result['nbOrders'];
+}
+function getAverageAmountOrders() {
+	global $db;
+	$req = $db->prepare('SELECT ROUND(AVG(amount), 2) as average FROM orders');
+	$req->execute();
+
+	$result = $req->fetch();
+	return $result['average'];
+}
