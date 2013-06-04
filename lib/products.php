@@ -225,17 +225,6 @@ function removeProduct($idProduct) {
 	}
 	return true;
 }
-/*function getMainEditorsByCategory($idCategory) {
-	global $db;
-	$req = $db->prepare('SELECT product.editor FROM product WHERE product.id_category = :idCategory AND product.editor != "" GROUP BY product.editor ORDER BY COUNT(product.id) LIMIT 0,5');
-	$req->execute(array(
-		':idCategory' => $idCategory
-	));
-
-	$editors = $req->fetchAll();
-
-	return $editors;
-}*/
 function isProduct($title, $idArtist, $idProduct = null) {
 	global $db;
 
@@ -255,40 +244,10 @@ function isProduct($title, $idArtist, $idProduct = null) {
 	
 	$product = $req->fetch();
 	if(!empty($product)) {
-		return "true";
+		return true;
 	}
 
-	$sql = 'SELECT product.image FROM product WHERE product.title = :title';
-	$parameters = array(
-		':title' => $title
-	);
-	if($idProduct != null) {
-		$sql .= ' AND product.id != :idProduct';
-		$parameters[':idProduct'] = $idProduct;
-	}
-	$req = $db->prepare($sql);
-	$req->execute($parameters);
-
-	$products = $req->fetchAll();
-	/* Si un produit avec le même titre (mais un artiste différent) existe en base, 
-	on retourne le numéro de l'image le plus grand + 1 */
-	if(!empty($products)) {
-		$countImg = 0;
-		$countMax = 0;
-		foreach($products as $product) {
-			preg_match("#-([0-9]+)\.#", $product['image'], $match);
-			if(!empty($match)) {
-				$countImg = $match[1];
-				if($countImg > $countMax) {
-					$countMax = $countImg;
-				}
-			}
-		}
-
-		return ++$countMax;
-	}
-
-	return "false";
+	return false;
 }
 function isInStock($idProduct) {
 	global $db;

@@ -99,19 +99,8 @@
 				}
 
 				// Vérifier que le produit n'existe pas déjà en base
-				// false - n'existe pas en base
-				// default - Produit avec même titre présent en base
-				// true - Produit avec même titre et même artiste présent en base
-				$isProduct = isProduct($title, $artist);
-				switch($isProduct) {
-					case "true" :
-						$errors[] = 'Ce produit est déjà répertorié dans la base de données.';
-						break;
-					case "false" :
-						break;
-					default :
-						//$countName = $isProduct;
-						break;
+				if(isProduct($title, $artist)) {
+					$errors[] = 'Ce produit est déjà répertorié dans la base de données.';
 				}
 
 				// Récupérer le fichier

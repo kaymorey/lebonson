@@ -16,7 +16,7 @@
 				<p>Aucun résultat.</p>
 			{% else %}
 			{% for product in products %}
-			{% include 'list/products.html.twig' with {'nbProductsRow' : 4} %}
+				{% include 'list/products.html.twig' with {'nbProductsRow' : 4} %}
 			{% endfor %}
 			{% endif %}
 			</div>
