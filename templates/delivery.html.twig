@@ -5,98 +5,100 @@
 	<h3>Livraison</h3>
 	{% include 'content/order-steps.html.twig' with {'active' : 'delivery'} %}
 	<div class="row-fluid">
-		<form action="delivery.php" method="post" class="address">
-			<fieldset>
-				<legend>Adresse de livraison</legend>
-				{% if errorsDelivery %}
-					{% include 'content/errors.html.twig' with {'errors' : errorsDelivery} %}
-				{% endif %}
-				<label>Civilité *</label>
-				<label class="radio inline" for="civility1">
-				<input type="radio" name="civility" id="civility1" value="Mme" {% if address and address.civility == "Mme" %} checked {% endif %}/>
-					Mme
-				</label>
-				<label class="radio inline" for="civility2">
-				<input type="radio" name="civility" id="civility2" value="Mlle" {% if address and address.civility == "Mlle" %} checked {% endif %}/>
-					Mlle
-				</label>
-				<label class="radio inline" for="civility3">
-				<input type="radio" name="civility" id="civility3" value="M." {% if address and address.civility == "M." %} checked {% endif %}/>
-					M.
-				</label>
-				<br />
-				<br />
-
-				<label for="lastname">Nom *</label>
-				<input type="text" id="lastname" name="lastname" value="{% if lastname %}{{ lastname }}{% elseif address %}{{ address.lastname }}{% endif %}" />
-
-				<label for="firstname">Prénom *</label>
-				<input type="text" id="firstname" name="firstname" value="{% if firstname %}{{ firstname }}{% elseif address %}{{ address.firstname }}{% endif %}" />
-
-				<label for="address1">Adresse *</label>
-				<input type="text" id="address1" name="address1" value="{% if address1 %}{{ address1 }}{% elseif address %}{{ address.address1 }}{% endif %}" />
-
-				<label for="address2">Complément d'adresse</label>
-				<input type="text" id="address2" name="address2" value="{% if address2 %}{{ address2 }}{% elseif address %}{{ address.address2 }}{% endif %}" />
-
-				<label for="postcode">Code postal *</label>
-				<input type="text" id="postcode" name="postcode" value="{% if postcode %}{{ postcode }}{% elseif address %}{{ address.postcode }}{% endif %}" />
-
-				<label for="city">Ville *</label>
-				<input type="text" id="city" name="city" value="{% if city %}{{ city }}{% elseif address %}{{ address.city }}{% endif %}" />
-
-				{% if address is empty %}
-					<label for="default" class="checkbox">
-						<input type="checkbox" id="default" name="default" /> Enregistrer comme adresse par défaut
+		<div class="span12">
+			<form action="delivery.php" method="post" class="address">
+				<fieldset>
+					<legend>Adresse de livraison</legend>
+					{% if errorsDelivery %}
+						{% include 'content/errors.html.twig' with {'errors' : errorsDelivery} %}
+					{% endif %}
+					<label>Civilité *</label>
+					<label class="radio inline" for="civility1">
+					<input type="radio" name="civility" id="civility1" value="Mme" {% if address and address.civility == "Mme" %} checked {% endif %}/>
+						Mme
 					</label>
-				{% endif %}
-				<label for="billing" class="checkbox">
-					<input type="checkbox" id="billing" name="billing" class="different-billing" /> Utiliser une adresse de facturation différente
-				</label>
-			</fieldset>
-			<fieldset class="billing">
-				<legend>Adresse de facturation</legend>
-				{% if errorsBilling %}
-					{% include 'content/errors.html.twig' with {'errors' : errorsBilling} %}
-				{% endif %}
-				<label>Civilité *</label>
-				<label class="radio inline" for="civility1B">
-				<input type="radio" name="civilityB" id="civility1B" value="Mme" />
-					Mme
-				</label>
-				<label class="radio inline" for="civility2B">
-				<input type="radio" name="civilityB" id="civility2B" value="Mlle" />
-					Mlle
-				</label>
-				<label class="radio inline" for="civility3B">
-				<input type="radio" name="civilityB" id="civility3B" value="M." />
-					M.
-				</label>
+					<label class="radio inline" for="civility2">
+					<input type="radio" name="civility" id="civility2" value="Mlle" {% if address and address.civility == "Mlle" %} checked {% endif %}/>
+						Mlle
+					</label>
+					<label class="radio inline" for="civility3">
+					<input type="radio" name="civility" id="civility3" value="M." {% if address and address.civility == "M." %} checked {% endif %}/>
+						M.
+					</label>
+					<br />
+					<br />
+
+					<label for="lastname">Nom *</label>
+					<input type="text" id="lastname" name="lastname" value="{% if lastname %}{{ lastname }}{% elseif address %}{{ address.lastname }}{% endif %}" />
+
+					<label for="firstname">Prénom *</label>
+					<input type="text" id="firstname" name="firstname" value="{% if firstname %}{{ firstname }}{% elseif address %}{{ address.firstname }}{% endif %}" />
+
+					<label for="address1">Adresse *</label>
+					<input type="text" id="address1" name="address1" value="{% if address1 %}{{ address1 }}{% elseif address %}{{ address.address1 }}{% endif %}" />
+
+					<label for="address2">Complément d'adresse</label>
+					<input type="text" id="address2" name="address2" value="{% if address2 %}{{ address2 }}{% elseif address %}{{ address.address2 }}{% endif %}" />
+
+					<label for="postcode">Code postal *</label>
+					<input type="text" id="postcode" name="postcode" value="{% if postcode %}{{ postcode }}{% elseif address %}{{ address.postcode }}{% endif %}" />
+
+					<label for="city">Ville *</label>
+					<input type="text" id="city" name="city" value="{% if city %}{{ city }}{% elseif address %}{{ address.city }}{% endif %}" />
+
+					{% if address is empty %}
+						<label for="default" class="checkbox">
+							<input type="checkbox" id="default" name="default" /> Enregistrer comme adresse par défaut
+						</label>
+					{% endif %}
+					<label for="billing" class="checkbox">
+						<input type="checkbox" id="billing" name="billing" class="different-billing" /> Utiliser une adresse de facturation différente
+					</label>
+				</fieldset>
+				<fieldset class="billing">
+					<legend>Adresse de facturation</legend>
+					{% if errorsBilling %}
+						{% include 'content/errors.html.twig' with {'errors' : errorsBilling} %}
+					{% endif %}
+					<label>Civilité *</label>
+					<label class="radio inline" for="civility1B">
+					<input type="radio" name="civilityB" id="civility1B" value="Mme" />
+						Mme
+					</label>
+					<label class="radio inline" for="civility2B">
+					<input type="radio" name="civilityB" id="civility2B" value="Mlle" />
+						Mlle
+					</label>
+					<label class="radio inline" for="civility3B">
+					<input type="radio" name="civilityB" id="civility3B" value="M." />
+						M.
+					</label>
+					<br />
+					<br />
+
+					<label for="lastnameB">Nom *</label>
+					<input type="text" id="lastnameB" name="lastnameB" value="{% if lastnameB %}{{ lastnameB }}{% endif %}" />
+
+					<label for="firstnameB">Prénom *</label>
+					<input type="text" id="firstnameB" name="firstnameB" value="{% if firstnameB %}{{ firstnameB }}{% endif %}" />
+
+					<label for="address1B">Adresse *</label>
+					<input type="text" id="address1B" name="address1B" value="{% if address1B %}{{ address1B }}{% endif %}" />
+
+					<label for="address2B">Complément d'adresse</label>
+					<input type="text" id="address2B" name="address2B" value="{% if address2B %}{{ address2B }}{% endif %}" />
+
+					<label for="postcodeB">Code postal *</label>
+					<input type="text" id="postcodeB" name="postcodeB" value="{% if postcodeB %}{{ postcodeB }}{% endif %}" />
+
+					<label for="cityB">Ville *</label>
+					<input type="text" id="cityB" name="cityB" value="{% if cityB %}cityB{% endif %}" />
+				</fieldset>
+				<button type="submit" class="btn btn-primary">Valider</button>
 				<br />
-				<br />
-
-				<label for="lastnameB">Nom *</label>
-				<input type="text" id="lastnameB" name="lastnameB" value="{% if lastnameB %}{{ lastnameB }}{% endif %}" />
-
-				<label for="firstnameB">Prénom *</label>
-				<input type="text" id="firstnameB" name="firstnameB" value="{% if firstnameB %}{{ firstnameB }}{% endif %}" />
-
-				<label for="address1B">Adresse *</label>
-				<input type="text" id="address1B" name="address1B" value="{% if address1B %}{{ address1B }}{% endif %}" />
-
-				<label for="address2B">Complément d'adresse</label>
-				<input type="text" id="address2B" name="address2B" value="{% if address2B %}{{ address2B }}{% endif %}" />
-
-				<label for="postcodeB">Code postal *</label>
-				<input type="text" id="postcodeB" name="postcodeB" value="{% if postcodeB %}{{ postcodeB }}{% endif %}" />
-
-				<label for="cityB">Ville *</label>
-				<input type="text" id="cityB" name="cityB" value="{% if cityB %}cityB{% endif %}" />
-			</fieldset>
-			<button type="submit" class="btn btn-primary">Valider</button>
-			<br />
-			<small>Les champs suivis d'un astérisque sont obligatoires.</small>
-		</form>
+				<small>Les champs suivis d'un astérisque sont obligatoires.</small>
+			</form>
+		</div>
 	</div>
 </div>
 {% endblock %}

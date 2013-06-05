@@ -158,6 +158,7 @@
 						$errors[] = 'Erreur lors de l\'exécution de la requête';
 					}
 					$addressDelivery = getLastAddress($idCustomer, 'delivery');
+					$addressDelivery = $addressDelivery['id'];
 				}
 				// ---- Adresse de facturation
 				// Vérifier si l'adresse n'est pas déjà répertoriée en base

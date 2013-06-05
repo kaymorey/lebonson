@@ -269,9 +269,9 @@ $(document).ready(function() {
 			$('table.cart tr:visible .td-total-price').find('.total-price').each(function() {
 				price = parseFloat($(this).text());
 				totalPriceCart += price;
-				totalPrice = totalPriceCart.toFixed(2);
-				console.log(totalPriceCart);
+				totalPriceCart = parseFloat(totalPriceCart);
 			});
+			totalPriceCart = totalPriceCart.toFixed(2);
 			$('div.cart .summary .total-price-cart').text(totalPriceCart);
 		});
 	}
