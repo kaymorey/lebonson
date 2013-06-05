@@ -38,7 +38,6 @@ $(document).ready(function() {
 		viewMode : 'years'
 	});
 	// Tri tableaux
-	$('.tablesorter').tablesorter();
 	$('table.artists').tablesorter({
 		headers: {
 			4: {

@@ -47,6 +47,13 @@ div.cart .summary {
 .product-list .caption a .lead {
   color: #555555;
 }
+.product-list h5 {
+  min-height: 60px;
+  margin: 5px;
+}
+.product-content {
+  margin-bottom: 60px;
+}
 .product-content img {
   margin: 0 20px 20px 0;
 }
