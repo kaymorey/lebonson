@@ -173,6 +173,7 @@
 						$errors[] = 'Erreur lors de l\'exécution de la requête';
 					}
 					$addressBilling = getLastAddress($idCustomer, 'billing');
+					$addressBilling = $addressBilling['id'];
 				}
 
 				if(empty($errors) && empty($errorsB)) {

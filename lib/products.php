@@ -264,7 +264,7 @@ function isInStock($idProduct) {
 }
 function getBestProducts() {
 	global $db;
-	$req = $db->prepare('SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product GROUP BY product.id ORDER BY total LIMIT 0,6');
+	$req = $db->prepare('SELECT SUM(order_detail.quantity) as total, product.* FROM product INNER JOIN order_detail ON product.id = order_detail.id_product GROUP BY product.id ORDER BY total DESC LIMIT 0,6');
 	$req->execute();
 	$products = $req->fetchAll();
 

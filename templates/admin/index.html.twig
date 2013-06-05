@@ -37,9 +37,8 @@
 					</thead>
 					<tbody>
 						{% for product in bestProducts %}
-						{% set artist = getArtistById(product.id_artist) %}
 						<tr>
-							<td><img src="{{ resize(root~'uploads/products/'~product.image, 50, 50, 'outbound') }}" alt="" /> {{ product.title }} - <small>{% if artist.firstname is not null %}{{ artist.firstname }} {% endif %}{{ artist.lastname }}</small></td>
+							<td><img src="{{ resize(root~'uploads/products/'~product.image, 50, 50, 'outbound') }}" alt="" /> {{ product.title }}</small></td>
 							<td>{{ product.total }} commande{% if product.total > 1 %}s{% endif %}</td>
 						</tr>
 						{% endfor %}
