@@ -12,8 +12,8 @@
 			{% set details = getOrderDetails(order.id) %}
 			{% if order.status == "En préparation" %}
 			<p class="text-info">Commande en préparation</p>
-			{% elseif order.status == "Expédiée" %}
-			<p class="text-success">Commande expédiée</p>
+			{% elseif order.status == "Envoyée" %}
+			<p class="text-success">Commande envoyée</p>
 			{% else %}
 			<p class="text-error">Commande annulée</p>
 			{% endif %}

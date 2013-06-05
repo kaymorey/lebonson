@@ -11,8 +11,8 @@
 		</h4>
 		{% if order.status == "En préparation" %}
 		<p class="text-info"><em>Commande en préparation</em></p>
-		{% elseif order.status == "Expédiée" %}
-		<p class="text-success"><em>Commande expédiée</em></p>
+		{% elseif order.status == "Envoyée" %}
+		<p class="text-success"><em>Commande envoyée</em></p>
 		{% else %}
 		<p class="text-error"><em>Commande annulée</em></p>
 		{% endif %}
